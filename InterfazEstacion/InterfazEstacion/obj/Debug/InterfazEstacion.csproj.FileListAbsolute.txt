@@ -7,3 +7,12 @@ c:\users\carlos\documents\visual studio 2015\Projects\InterfazEstacion\InterfazE
 c:\users\carlos\documents\visual studio 2015\Projects\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.csproj.GenerateResource.Cache
 c:\users\carlos\documents\visual studio 2015\Projects\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.exe
 c:\users\carlos\documents\visual studio 2015\Projects\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.pdb
+D:\JB-COSAS\Universidad\SD\prac2\Proyecto\EstacionMeteo2\InterfazEstacion\InterfazEstacion\bin\Debug\InterfazEstacion.exe.config
+D:\JB-COSAS\Universidad\SD\prac2\Proyecto\EstacionMeteo2\InterfazEstacion\InterfazEstacion\bin\Debug\InterfazEstacion.exe
+D:\JB-COSAS\Universidad\SD\prac2\Proyecto\EstacionMeteo2\InterfazEstacion\InterfazEstacion\bin\Debug\InterfazEstacion.pdb
+D:\JB-COSAS\Universidad\SD\prac2\Proyecto\EstacionMeteo2\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.csprojResolveAssemblyReference.cache
+D:\JB-COSAS\Universidad\SD\prac2\Proyecto\EstacionMeteo2\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.Form1.resources
+D:\JB-COSAS\Universidad\SD\prac2\Proyecto\EstacionMeteo2\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.Properties.Resources.resources
+D:\JB-COSAS\Universidad\SD\prac2\Proyecto\EstacionMeteo2\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.csproj.GenerateResource.Cache
+D:\JB-COSAS\Universidad\SD\prac2\Proyecto\EstacionMeteo2\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.exe
+D:\JB-COSAS\Universidad\SD\prac2\Proyecto\EstacionMeteo2\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.pdb

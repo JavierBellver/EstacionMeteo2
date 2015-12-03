@@ -5,8 +5,8 @@
     <Setting Name="InterfazEstacion_EstacionMeteo_EstacionMeteo" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://localhost:8080/EstacionMeteo/services/EstacionMeteo.EstacionMeteoHttpSoap11Endpoint/</Value>
     </Setting>
-    <Setting Name="InterfazEstacion_EstMeteo_EstacionMeteo" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://localhost:8080/EstacionMeteo/services/EstacionMeteo.EstacionMeteoHttpSoap11Endpoint/</Value>
+    <Setting Name="InterfazEstacion_localhost_EstacionMeteo" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:8080/EstacionMeteoServicio/services/EstacionMeteo.EstacionMeteoHttpSoap11Endpoint/</Value>
     </Setting>
   </Settings>
 </SettingsFile>
