@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="InterfazEstacion.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="InterfazEstacion_EstacionMeteo_EstacionMeteo" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:8080/EstacionMeteo/services/EstacionMeteo.EstacionMeteoHttpSoap11Endpoint/</Value>
+    </Setting>
+    <Setting Name="InterfazEstacion_EstMeteo_EstacionMeteo" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:8080/EstacionMeteo/services/EstacionMeteo.EstacionMeteoHttpSoap11Endpoint/</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

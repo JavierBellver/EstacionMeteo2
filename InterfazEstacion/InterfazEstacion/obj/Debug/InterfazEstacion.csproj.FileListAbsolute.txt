@@ -1,0 +1,9 @@
+c:\users\carlos\documents\visual studio 2015\Projects\InterfazEstacion\InterfazEstacion\bin\Debug\InterfazEstacion.exe.config
+c:\users\carlos\documents\visual studio 2015\Projects\InterfazEstacion\InterfazEstacion\bin\Debug\InterfazEstacion.exe
+c:\users\carlos\documents\visual studio 2015\Projects\InterfazEstacion\InterfazEstacion\bin\Debug\InterfazEstacion.pdb
+c:\users\carlos\documents\visual studio 2015\Projects\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.csprojResolveAssemblyReference.cache
+c:\users\carlos\documents\visual studio 2015\Projects\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.Form1.resources
+c:\users\carlos\documents\visual studio 2015\Projects\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.Properties.Resources.resources
+c:\users\carlos\documents\visual studio 2015\Projects\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.csproj.GenerateResource.Cache
+c:\users\carlos\documents\visual studio 2015\Projects\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.exe
+c:\users\carlos\documents\visual studio 2015\Projects\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.pdb

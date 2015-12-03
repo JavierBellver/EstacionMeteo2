@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ax21="http://io.java/xsd" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ax23="http://rmi.java/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns="http://master" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" targetNamespace="http://master" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+  <wsdl:types>
+    <xs:schema xmlns:ax24="http://io.java/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://rmi.java/xsd">
+      <xs:import namespace="http://io.java/xsd" />
+      <xs:complexType name="RemoteException">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ax24:IOException">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="cause" nillable="true" type="xs:anyType" />
+              <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://io.java/xsd">
+      <xs:complexType name="IOException">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="FileNotFoundException">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ax21:IOException">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:ax25="http://rmi.java/xsd" xmlns:ax22="http://io.java/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://master">
+      <xs:import namespace="http://io.java/xsd" />
+      <xs:import namespace="http://rmi.java/xsd" />
+      <xs:element name="getLuminosidad">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getLuminosidadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="EstacionMeteoIOException">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="IOException" nillable="true" type="ax22:IOException" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="EstacionMeteoFileNotFoundException">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="FileNotFoundException" nillable="true" type="ax22:FileNotFoundException" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="EscribirFichero">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setLuminosidad">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="newLum" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setLuminosidadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setHumedad">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="newHum" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setHumedadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Lectura">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Atributo" nillable="true" type="xs:string" />
+            <xs:element name="nValor" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="LecturaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="return" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getNombreMaquina">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getNombreMaquinaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPantalla">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPantallaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setTemperatura">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="newTemp" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setTemperaturaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTemperatura">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTemperaturaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Modifica">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="valores" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getHumedad">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getHumedadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="EstacionMeteoRemoteException">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="RemoteException" nillable="true" type="ax25:RemoteException" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="muestraContenido">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="archivo" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="muestraContenidoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="return" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setMsg">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="newMsg" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setMsgResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ModificaRequest">
+    <wsdl:part name="parameters" element="ns:Modifica" />
+  </wsdl:message>
+  <wsdl:message name="LecturaRequest">
+    <wsdl:part name="parameters" element="ns:Lectura" />
+  </wsdl:message>
+  <wsdl:message name="LecturaResponse">
+    <wsdl:part name="parameters" element="ns:LecturaResponse" />
+  </wsdl:message>
+  <wsdl:message name="setTemperaturaRequest">
+    <wsdl:part name="parameters" element="ns:setTemperatura" />
+  </wsdl:message>
+  <wsdl:message name="setTemperaturaResponse">
+    <wsdl:part name="parameters" element="ns:setTemperaturaResponse" />
+  </wsdl:message>
+  <wsdl:message name="getHumedadRequest">
+    <wsdl:part name="parameters" element="ns:getHumedad" />
+  </wsdl:message>
+  <wsdl:message name="getHumedadResponse">
+    <wsdl:part name="parameters" element="ns:getHumedadResponse" />
+  </wsdl:message>
+  <wsdl:message name="EscribirFicheroRequest">
+    <wsdl:part name="parameters" element="ns:EscribirFichero" />
+  </wsdl:message>
+  <wsdl:message name="EstacionMeteoIOException">
+    <wsdl:part name="parameters" element="ns:EstacionMeteoIOException" />
+  </wsdl:message>
+  <wsdl:message name="EstacionMeteoFileNotFoundException">
+    <wsdl:part name="parameters" element="ns:EstacionMeteoFileNotFoundException" />
+  </wsdl:message>
+  <wsdl:message name="setLuminosidadRequest">
+    <wsdl:part name="parameters" element="ns:setLuminosidad" />
+  </wsdl:message>
+  <wsdl:message name="setLuminosidadResponse">
+    <wsdl:part name="parameters" element="ns:setLuminosidadResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLuminosidadRequest">
+    <wsdl:part name="parameters" element="ns:getLuminosidad" />
+  </wsdl:message>
+  <wsdl:message name="getLuminosidadResponse">
+    <wsdl:part name="parameters" element="ns:getLuminosidadResponse" />
+  </wsdl:message>
+  <wsdl:message name="getNombreMaquinaRequest">
+    <wsdl:part name="parameters" element="ns:getNombreMaquina" />
+  </wsdl:message>
+  <wsdl:message name="getNombreMaquinaResponse">
+    <wsdl:part name="parameters" element="ns:getNombreMaquinaResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPantallaRequest">
+    <wsdl:part name="parameters" element="ns:getPantalla" />
+  </wsdl:message>
+  <wsdl:message name="getPantallaResponse">
+    <wsdl:part name="parameters" element="ns:getPantallaResponse" />
+  </wsdl:message>
+  <wsdl:message name="getTemperaturaRequest">
+    <wsdl:part name="parameters" element="ns:getTemperatura" />
+  </wsdl:message>
+  <wsdl:message name="getTemperaturaResponse">
+    <wsdl:part name="parameters" element="ns:getTemperaturaResponse" />
+  </wsdl:message>
+  <wsdl:message name="muestraContenidoRequest">
+    <wsdl:part name="parameters" element="ns:muestraContenido" />
+  </wsdl:message>
+  <wsdl:message name="muestraContenidoResponse">
+    <wsdl:part name="parameters" element="ns:muestraContenidoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EstacionMeteoRemoteException">
+    <wsdl:part name="parameters" element="ns:EstacionMeteoRemoteException" />
+  </wsdl:message>
+  <wsdl:message name="setHumedadRequest">
+    <wsdl:part name="parameters" element="ns:setHumedad" />
+  </wsdl:message>
+  <wsdl:message name="setHumedadResponse">
+    <wsdl:part name="parameters" element="ns:setHumedadResponse" />
+  </wsdl:message>
+  <wsdl:message name="setMsgRequest">
+    <wsdl:part name="parameters" element="ns:setMsg" />
+  </wsdl:message>
+  <wsdl:message name="setMsgResponse">
+    <wsdl:part name="parameters" element="ns:setMsgResponse" />
+  </wsdl:message>
+  <wsdl:portType name="EstacionMeteoPortType">
+    <wsdl:operation name="Modifica">
+      <wsdl:input wsaw:Action="urn:Modifica" message="ns:ModificaRequest" />
+    </wsdl:operation>
+    <wsdl:operation name="Lectura">
+      <wsdl:input wsaw:Action="urn:Lectura" message="ns:LecturaRequest" />
+      <wsdl:output wsaw:Action="urn:LecturaResponse" message="ns:LecturaResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setTemperatura">
+      <wsdl:input wsaw:Action="urn:setTemperatura" message="ns:setTemperaturaRequest" />
+      <wsdl:output wsaw:Action="urn:setTemperaturaResponse" message="ns:setTemperaturaResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getHumedad">
+      <wsdl:input wsaw:Action="urn:getHumedad" message="ns:getHumedadRequest" />
+      <wsdl:output wsaw:Action="urn:getHumedadResponse" message="ns:getHumedadResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="EscribirFichero">
+      <wsdl:input wsaw:Action="urn:EscribirFichero" message="ns:EscribirFicheroRequest" />
+      <wsdl:output wsaw:Action="urn:EscribirFicheroResponse" message="ns:null" />
+      <wsdl:fault wsaw:Action="urn:EscribirFicheroEstacionMeteoIOException" name="EstacionMeteoIOException" message="ns:EstacionMeteoIOException" />
+      <wsdl:fault wsaw:Action="urn:EscribirFicheroEstacionMeteoFileNotFoundException" name="EstacionMeteoFileNotFoundException" message="ns:EstacionMeteoFileNotFoundException" />
+    </wsdl:operation>
+    <wsdl:operation name="setLuminosidad">
+      <wsdl:input wsaw:Action="urn:setLuminosidad" message="ns:setLuminosidadRequest" />
+      <wsdl:output wsaw:Action="urn:setLuminosidadResponse" message="ns:setLuminosidadResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLuminosidad">
+      <wsdl:input wsaw:Action="urn:getLuminosidad" message="ns:getLuminosidadRequest" />
+      <wsdl:output wsaw:Action="urn:getLuminosidadResponse" message="ns:getLuminosidadResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getNombreMaquina">
+      <wsdl:input wsaw:Action="urn:getNombreMaquina" message="ns:getNombreMaquinaRequest" />
+      <wsdl:output wsaw:Action="urn:getNombreMaquinaResponse" message="ns:getNombreMaquinaResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getPantalla">
+      <wsdl:input wsaw:Action="urn:getPantalla" message="ns:getPantallaRequest" />
+      <wsdl:output wsaw:Action="urn:getPantallaResponse" message="ns:getPantallaResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getTemperatura">
+      <wsdl:input wsaw:Action="urn:getTemperatura" message="ns:getTemperaturaRequest" />
+      <wsdl:output wsaw:Action="urn:getTemperaturaResponse" message="ns:getTemperaturaResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="muestraContenido">
+      <wsdl:input wsaw:Action="urn:muestraContenido" message="ns:muestraContenidoRequest" />
+      <wsdl:output wsaw:Action="urn:muestraContenidoResponse" message="ns:muestraContenidoResponse" />
+      <wsdl:fault wsaw:Action="urn:muestraContenidoEstacionMeteoFileNotFoundException" name="EstacionMeteoFileNotFoundException" message="ns:EstacionMeteoFileNotFoundException" />
+      <wsdl:fault wsaw:Action="urn:muestraContenidoEstacionMeteoIOException" name="EstacionMeteoIOException" message="ns:EstacionMeteoIOException" />
+      <wsdl:fault wsaw:Action="urn:muestraContenidoEstacionMeteoRemoteException" name="EstacionMeteoRemoteException" message="ns:EstacionMeteoRemoteException" />
+    </wsdl:operation>
+    <wsdl:operation name="setHumedad">
+      <wsdl:input wsaw:Action="urn:setHumedad" message="ns:setHumedadRequest" />
+      <wsdl:output wsaw:Action="urn:setHumedadResponse" message="ns:setHumedadResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setMsg">
+      <wsdl:input wsaw:Action="urn:setMsg" message="ns:setMsgRequest" />
+      <wsdl:output wsaw:Action="urn:setMsgResponse" message="ns:setMsgResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EstacionMeteoSoap11Binding" type="ns:EstacionMeteoPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Modifica">
+      <soap:operation soapAction="urn:Modifica" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Lectura">
+      <soap:operation soapAction="urn:Lectura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setTemperatura">
+      <soap:operation soapAction="urn:setTemperatura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getHumedad">
+      <soap:operation soapAction="urn:getHumedad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EscribirFichero">
+      <soap:operation soapAction="urn:EscribirFichero" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="EstacionMeteoIOException">
+        <soap:fault use="literal" name="EstacionMeteoIOException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="EstacionMeteoFileNotFoundException">
+        <soap:fault use="literal" name="EstacionMeteoFileNotFoundException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setLuminosidad">
+      <soap:operation soapAction="urn:setLuminosidad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLuminosidad">
+      <soap:operation soapAction="urn:getLuminosidad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNombreMaquina">
+      <soap:operation soapAction="urn:getNombreMaquina" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPantalla">
+      <soap:operation soapAction="urn:getPantalla" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTemperatura">
+      <soap:operation soapAction="urn:getTemperatura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="muestraContenido">
+      <soap:operation soapAction="urn:muestraContenido" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="EstacionMeteoIOException">
+        <soap:fault use="literal" name="EstacionMeteoIOException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="EstacionMeteoFileNotFoundException">
+        <soap:fault use="literal" name="EstacionMeteoFileNotFoundException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="EstacionMeteoRemoteException">
+        <soap:fault use="literal" name="EstacionMeteoRemoteException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setHumedad">
+      <soap:operation soapAction="urn:setHumedad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setMsg">
+      <soap:operation soapAction="urn:setMsg" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="EstacionMeteoSoap12Binding" type="ns:EstacionMeteoPortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Modifica">
+      <soap12:operation soapAction="urn:Modifica" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Lectura">
+      <soap12:operation soapAction="urn:Lectura" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setTemperatura">
+      <soap12:operation soapAction="urn:setTemperatura" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getHumedad">
+      <soap12:operation soapAction="urn:getHumedad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EscribirFichero">
+      <soap12:operation soapAction="urn:EscribirFichero" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="EstacionMeteoIOException">
+        <soap12:fault use="literal" name="EstacionMeteoIOException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="EstacionMeteoFileNotFoundException">
+        <soap12:fault use="literal" name="EstacionMeteoFileNotFoundException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setLuminosidad">
+      <soap12:operation soapAction="urn:setLuminosidad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLuminosidad">
+      <soap12:operation soapAction="urn:getLuminosidad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNombreMaquina">
+      <soap12:operation soapAction="urn:getNombreMaquina" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPantalla">
+      <soap12:operation soapAction="urn:getPantalla" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTemperatura">
+      <soap12:operation soapAction="urn:getTemperatura" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="muestraContenido">
+      <soap12:operation soapAction="urn:muestraContenido" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="EstacionMeteoIOException">
+        <soap12:fault use="literal" name="EstacionMeteoIOException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="EstacionMeteoFileNotFoundException">
+        <soap12:fault use="literal" name="EstacionMeteoFileNotFoundException" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="EstacionMeteoRemoteException">
+        <soap12:fault use="literal" name="EstacionMeteoRemoteException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setHumedad">
+      <soap12:operation soapAction="urn:setHumedad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setMsg">
+      <soap12:operation soapAction="urn:setMsg" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="EstacionMeteoHttpBinding" type="ns:EstacionMeteoPortType">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Modifica">
+      <http:operation location="Modifica" />
+      <wsdl:input>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Lectura">
+      <http:operation location="Lectura" />
+      <wsdl:input>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setTemperatura">
+      <http:operation location="setTemperatura" />
+      <wsdl:input>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getHumedad">
+      <http:operation location="getHumedad" />
+      <wsdl:input>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EscribirFichero">
+      <http:operation location="EscribirFichero" />
+      <wsdl:input>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setLuminosidad">
+      <http:operation location="setLuminosidad" />
+      <wsdl:input>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLuminosidad">
+      <http:operation location="getLuminosidad" />
+      <wsdl:input>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNombreMaquina">
+      <http:operation location="getNombreMaquina" />
+      <wsdl:input>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPantalla">
+      <http:operation location="getPantalla" />
+      <wsdl:input>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTemperatura">
+      <http:operation location="getTemperatura" />
+      <wsdl:input>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="muestraContenido">
+      <http:operation location="muestraContenido" />
+      <wsdl:input>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setHumedad">
+      <http:operation location="setHumedad" />
+      <wsdl:input>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setMsg">
+      <http:operation location="setMsg" />
+      <wsdl:input>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EstacionMeteo">
+    <wsdl:port name="EstacionMeteoHttpSoap11Endpoint" binding="ns:EstacionMeteoSoap11Binding">
+      <soap:address location="http://localhost:8080/EstacionMeteo/services/EstacionMeteo.EstacionMeteoHttpSoap11Endpoint/" />
+    </wsdl:port>
+    <wsdl:port name="EstacionMeteoHttpSoap12Endpoint" binding="ns:EstacionMeteoSoap12Binding">
+      <soap12:address location="http://localhost:8080/EstacionMeteo/services/EstacionMeteo.EstacionMeteoHttpSoap12Endpoint/" />
+    </wsdl:port>
+    <wsdl:port name="EstacionMeteoHttpEndpoint" binding="ns:EstacionMeteoHttpBinding">
+      <http:address location="http://localhost:8080/EstacionMeteo/services/EstacionMeteo.EstacionMeteoHttpEndpoint/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
