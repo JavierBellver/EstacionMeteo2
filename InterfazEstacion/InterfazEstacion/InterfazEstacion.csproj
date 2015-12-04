@@ -57,6 +57,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web References\EstMeteo\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -82,6 +87,7 @@
     <None Include="Web References\EstMeteo\EstacionMeteo.wsdl" />
     <None Include="Web References\EstMeteo\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -94,10 +100,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://localhost:8080/EstacionMeteoServicio/services/EstacionMeteo%3fwsdl">
+    <WebReferenceUrl Include="http://localhost:8080/EstacionMeteoService/services/EstacionMeteo%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\EstMeteo\</RelPath>
-      <UpdateFromURL>http://localhost:8080/EstacionMeteoServicio/services/EstacionMeteo%3fwsdl</UpdateFromURL>
+      <UpdateFromURL>http://localhost:8080/EstacionMeteoService/services/EstacionMeteo%3fwsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
