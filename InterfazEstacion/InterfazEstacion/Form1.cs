@@ -26,15 +26,15 @@ namespace InterfazEstacion
             switch (comboBox_Atributo.Text)
             {
                 case "Temperatura":
-                    em.getTemperatura(out res, out resb);
+                    res = em.getTemperatura();
                     label_resultados.Text = "Temperatura=";
                     break;
                 case "Humedad":
-                    em.getHumedad(out res, out resb);
+                    res = em.getHumedad();
                     label_resultados.Text = "Humedad=";
                     break;
                 case "Luminosidad":
-                    em.getLuminosidad(out res, out resb);
+                    res = em.getLuminosidad();
                     label_resultados.Text = "Luminosidad=";
                     break;
             }

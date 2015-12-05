@@ -43,9 +43,9 @@ namespace InterfazEstacion.EstMeteo {
         
         private System.Threading.SendOrPostCallback setLuminosidadOperationCompleted;
         
-        private System.Threading.SendOrPostCallback getLuminosidadOperationCompleted;
-        
         private System.Threading.SendOrPostCallback muestraContenidoOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getLuminosidadOperationCompleted;
         
         private System.Threading.SendOrPostCallback setHumedadOperationCompleted;
         
@@ -55,7 +55,7 @@ namespace InterfazEstacion.EstMeteo {
         
         /// <remarks/>
         public EstacionMeteo() {
-            this.Url = global::InterfazEstacion.Properties.Settings.Default.InterfazEstacion_localhost_EstacionMeteo;
+            this.Url = global::InterfazEstacion.Properties.Settings.Default.InterfazEstacion_EstMeteo_EstacionMeteo;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -111,10 +111,10 @@ namespace InterfazEstacion.EstMeteo {
         public event setLuminosidadCompletedEventHandler setLuminosidadCompleted;
         
         /// <remarks/>
-        public event getLuminosidadCompletedEventHandler getLuminosidadCompleted;
+        public event muestraContenidoCompletedEventHandler muestraContenidoCompleted;
         
         /// <remarks/>
-        public event muestraContenidoCompletedEventHandler muestraContenidoCompleted;
+        public event getLuminosidadCompletedEventHandler getLuminosidadCompleted;
         
         /// <remarks/>
         public event setHumedadCompletedEventHandler setHumedadCompleted;
@@ -327,34 +327,6 @@ namespace InterfazEstacion.EstMeteo {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:getLuminosidad", RequestNamespace="http://estacion", ResponseNamespace="http://estacion", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return")]
-        public int getLuminosidad() {
-            object[] results = this.Invoke("getLuminosidad", new object[0]);
-            return ((int)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void getLuminosidadAsync() {
-            this.getLuminosidadAsync(null);
-        }
-        
-        /// <remarks/>
-        public void getLuminosidadAsync(object userState) {
-            if ((this.getLuminosidadOperationCompleted == null)) {
-                this.getLuminosidadOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetLuminosidadOperationCompleted);
-            }
-            this.InvokeAsync("getLuminosidad", new object[0], this.getLuminosidadOperationCompleted, userState);
-        }
-        
-        private void OngetLuminosidadOperationCompleted(object arg) {
-            if ((this.getLuminosidadCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.getLuminosidadCompleted(this, new getLuminosidadCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:muestraContenido", RequestNamespace="http://estacion", ResponseNamespace="http://estacion", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return")]
         public int[] muestraContenido([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string archivo) {
@@ -381,6 +353,34 @@ namespace InterfazEstacion.EstMeteo {
             if ((this.muestraContenidoCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.muestraContenidoCompleted(this, new muestraContenidoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:getLuminosidad", RequestNamespace="http://estacion", ResponseNamespace="http://estacion", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return")]
+        public int getLuminosidad() {
+            object[] results = this.Invoke("getLuminosidad", new object[0]);
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getLuminosidadAsync() {
+            this.getLuminosidadAsync(null);
+        }
+        
+        /// <remarks/>
+        public void getLuminosidadAsync(object userState) {
+            if ((this.getLuminosidadOperationCompleted == null)) {
+                this.getLuminosidadOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetLuminosidadOperationCompleted);
+            }
+            this.InvokeAsync("getLuminosidad", new object[0], this.getLuminosidadOperationCompleted, userState);
+        }
+        
+        private void OngetLuminosidadOperationCompleted(object arg) {
+            if ((this.getLuminosidadCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getLuminosidadCompleted(this, new getLuminosidadCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -625,32 +625,6 @@ namespace InterfazEstacion.EstMeteo {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.33440")]
-    public delegate void getLuminosidadCompletedEventHandler(object sender, getLuminosidadCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.33440")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class getLuminosidadCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal getLuminosidadCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public int Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((int)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.33440")]
     public delegate void muestraContenidoCompletedEventHandler(object sender, muestraContenidoCompletedEventArgs e);
     
     /// <remarks/>
@@ -671,6 +645,32 @@ namespace InterfazEstacion.EstMeteo {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((int[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.33440")]
+    public delegate void getLuminosidadCompletedEventHandler(object sender, getLuminosidadCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.33440")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getLuminosidadCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getLuminosidadCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
             }
         }
     }

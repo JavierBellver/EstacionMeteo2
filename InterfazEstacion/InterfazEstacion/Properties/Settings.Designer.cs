@@ -39,9 +39,9 @@ namespace InterfazEstacion.Properties {
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:8080/EstacionMeteoService/services/EstacionMeteo.EstacionMeteoHt" +
             "tpSoap11Endpoint/")]
-        public string InterfazEstacion_localhost_EstacionMeteo {
+        public string InterfazEstacion_EstMeteo_EstacionMeteo {
             get {
-                return ((string)(this["InterfazEstacion_localhost_EstacionMeteo"]));
+                return ((string)(this["InterfazEstacion_EstMeteo_EstacionMeteo"]));
             }
         }
     }

@@ -109,7 +109,7 @@
       <CachedDynamicPropName>
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>InterfazEstacion_localhost_EstacionMeteo</CachedSettingsPropName>
+      <CachedSettingsPropName>InterfazEstacion_EstMeteo_EstacionMeteo</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

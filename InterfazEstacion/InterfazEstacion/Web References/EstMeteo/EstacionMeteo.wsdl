@@ -32,129 +32,10 @@
     <xs:schema xmlns:ax25="http://rmi.java/xsd" xmlns:ax22="http://io.java/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://estacion">
       <xs:import namespace="http://io.java/xsd" />
       <xs:import namespace="http://rmi.java/xsd" />
-      <xs:element name="getLuminosidad">
-        <xs:complexType>
-          <xs:sequence />
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="getLuminosidadResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="return" type="xs:int" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="Modifica">
         <xs:complexType>
           <xs:sequence>
             <xs:element maxOccurs="unbounded" name="valores" type="xs:int" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="setHumedad">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="newHum" type="xs:int" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="setHumedadResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="setLuminosidad">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="newLum" type="xs:int" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="setLuminosidadResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="getPantalla">
-        <xs:complexType>
-          <xs:sequence />
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="getPantallaResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="getTemperatura">
-        <xs:complexType>
-          <xs:sequence />
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="getTemperaturaResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="return" type="xs:int" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="Lectura">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="Atributo" nillable="true" type="xs:string" />
-            <xs:element name="nValor" type="xs:int" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="LecturaResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element maxOccurs="unbounded" name="return" type="xs:int" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="setTemperatura">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="newTemp" type="xs:int" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="setTemperaturaResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="getHumedad">
-        <xs:complexType>
-          <xs:sequence />
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="getHumedadResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="return" type="xs:int" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="setMsg">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="newMsg" nillable="true" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="setMsgResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -190,6 +71,125 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element maxOccurs="unbounded" name="return" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTemperatura">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTemperaturaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setHumedad">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="newHum" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setHumedadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getHumedad">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getHumedadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setLuminosidad">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="newLum" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setLuminosidadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setMsg">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="newMsg" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setMsgResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPantalla">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPantallaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Lectura">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Atributo" nillable="true" type="xs:string" />
+            <xs:element name="nValor" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="LecturaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" name="return" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setTemperatura">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="newTemp" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setTemperaturaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getLuminosidad">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getLuminosidadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:int" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -234,12 +234,6 @@
   <wsdl:message name="setLuminosidadResponse">
     <wsdl:part name="parameters" element="ns:setLuminosidadResponse" />
   </wsdl:message>
-  <wsdl:message name="getLuminosidadRequest">
-    <wsdl:part name="parameters" element="ns:getLuminosidad" />
-  </wsdl:message>
-  <wsdl:message name="getLuminosidadResponse">
-    <wsdl:part name="parameters" element="ns:getLuminosidadResponse" />
-  </wsdl:message>
   <wsdl:message name="muestraContenidoRequest">
     <wsdl:part name="parameters" element="ns:muestraContenido" />
   </wsdl:message>
@@ -254,6 +248,12 @@
   </wsdl:message>
   <wsdl:message name="EstacionMeteoRemoteException">
     <wsdl:part name="parameters" element="ns:EstacionMeteoRemoteException" />
+  </wsdl:message>
+  <wsdl:message name="getLuminosidadRequest">
+    <wsdl:part name="parameters" element="ns:getLuminosidad" />
+  </wsdl:message>
+  <wsdl:message name="getLuminosidadResponse">
+    <wsdl:part name="parameters" element="ns:getLuminosidadResponse" />
   </wsdl:message>
   <wsdl:message name="setHumedadRequest">
     <wsdl:part name="parameters" element="ns:setHumedad" />
@@ -295,16 +295,16 @@
       <wsdl:input wsaw:Action="urn:setLuminosidad" message="ns:setLuminosidadRequest" />
       <wsdl:output wsaw:Action="urn:setLuminosidadResponse" message="ns:setLuminosidadResponse" />
     </wsdl:operation>
-    <wsdl:operation name="getLuminosidad">
-      <wsdl:input wsaw:Action="urn:getLuminosidad" message="ns:getLuminosidadRequest" />
-      <wsdl:output wsaw:Action="urn:getLuminosidadResponse" message="ns:getLuminosidadResponse" />
-    </wsdl:operation>
     <wsdl:operation name="muestraContenido">
       <wsdl:input wsaw:Action="urn:muestraContenido" message="ns:muestraContenidoRequest" />
       <wsdl:output wsaw:Action="urn:muestraContenidoResponse" message="ns:muestraContenidoResponse" />
       <wsdl:fault wsaw:Action="urn:muestraContenidoEstacionMeteoFileNotFoundException" name="EstacionMeteoFileNotFoundException" message="ns:EstacionMeteoFileNotFoundException" />
       <wsdl:fault wsaw:Action="urn:muestraContenidoEstacionMeteoIOException" name="EstacionMeteoIOException" message="ns:EstacionMeteoIOException" />
       <wsdl:fault wsaw:Action="urn:muestraContenidoEstacionMeteoRemoteException" name="EstacionMeteoRemoteException" message="ns:EstacionMeteoRemoteException" />
+    </wsdl:operation>
+    <wsdl:operation name="getLuminosidad">
+      <wsdl:input wsaw:Action="urn:getLuminosidad" message="ns:getLuminosidadRequest" />
+      <wsdl:output wsaw:Action="urn:getLuminosidadResponse" message="ns:getLuminosidadResponse" />
     </wsdl:operation>
     <wsdl:operation name="setHumedad">
       <wsdl:input wsaw:Action="urn:setHumedad" message="ns:setHumedadRequest" />
@@ -377,15 +377,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getLuminosidad">
-      <soap:operation soapAction="urn:getLuminosidad" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="muestraContenido">
       <soap:operation soapAction="urn:muestraContenido" style="document" />
       <wsdl:input>
@@ -403,6 +394,15 @@
       <wsdl:fault name="EstacionMeteoRemoteException">
         <soap:fault use="literal" name="EstacionMeteoRemoteException" namespace="" />
       </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getLuminosidad">
+      <soap:operation soapAction="urn:getLuminosidad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="setHumedad">
       <soap:operation soapAction="urn:setHumedad" style="document" />
@@ -485,15 +485,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getLuminosidad">
-      <soap12:operation soapAction="urn:getLuminosidad" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="muestraContenido">
       <soap12:operation soapAction="urn:muestraContenido" style="document" />
       <wsdl:input>
@@ -511,6 +502,15 @@
       <wsdl:fault name="EstacionMeteoRemoteException">
         <soap12:fault use="literal" name="EstacionMeteoRemoteException" namespace="" />
       </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getLuminosidad">
+      <soap12:operation soapAction="urn:getLuminosidad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="setHumedad">
       <soap12:operation soapAction="urn:setHumedad" style="document" />
@@ -593,8 +593,8 @@
         <mime:content part="parameters" type="application/xml" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getLuminosidad">
-      <http:operation location="getLuminosidad" />
+    <wsdl:operation name="muestraContenido">
+      <http:operation location="muestraContenido" />
       <wsdl:input>
         <mime:content part="parameters" type="application/xml" />
       </wsdl:input>
@@ -602,8 +602,8 @@
         <mime:content part="parameters" type="application/xml" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="muestraContenido">
-      <http:operation location="muestraContenido" />
+    <wsdl:operation name="getLuminosidad">
+      <http:operation location="getLuminosidad" />
       <wsdl:input>
         <mime:content part="parameters" type="application/xml" />
       </wsdl:input>
