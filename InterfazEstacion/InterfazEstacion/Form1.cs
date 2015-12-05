@@ -21,7 +21,6 @@ namespace InterfazEstacion
         private void button_Consultar_Click(object sender, EventArgs e)
         {
             int res=0;
-            Boolean resb = true;
             EstMeteo.EstacionMeteo em = new EstMeteo.EstacionMeteo();
             switch (comboBox_Atributo.Text)
             {
@@ -38,18 +37,41 @@ namespace InterfazEstacion
                     label_resultados.Text = "Luminosidad=";
                     break;
             }
-
-
             label_resultados.Text = label_resultados.Text + res;
-
-
         }
 
-        private void Button_Conectar_Click(object sender, EventArgs e)
+
+
+        private void button_Modificar_Click(object sender, EventArgs e)
+        {
+            string res = "La operación fallo";
+            EstMeteo.EstacionMeteo em = new EstMeteo.EstacionMeteo();
+            switch (comboBox_Atributo.Text)
+            {
+                case "Temperatura":
+                    res = em.setTemperatura(Int32.Parse(textBox_NuevoValor.Text));
+                    label_resultados.Text = res;
+                    break;
+                case "Humedad":
+                    res = em.setHumedad(Int32.Parse(textBox_NuevoValor.Text));
+                    label_resultados.Text = res;
+                    break;
+                case "Luminosidad":
+                    res = em.setLuminosidad(Int32.Parse(textBox_NuevoValor.Text));
+                    label_resultados.Text = res;
+                    break;
+            }
+        }
+
+        private void Button_Add_Click(object sender, EventArgs e)
         {
             listView_estacionesReg.Items.Add(textBox_direccion.Text);
             comboBox_Estacion.Items.Insert(comboBox_Estacion.Items.Count, textBox_direccion.Text);
+        }
 
+        private void listView_estacionesReg_ItemActivate(object server, EventArgs e)
+        {
+            mensaje_conexion.Text = "Conectado";
         }
     }
 }

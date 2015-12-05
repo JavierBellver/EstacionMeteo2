@@ -32,7 +32,7 @@
             this.Estaciones = new System.Windows.Forms.TabPage();
             this.label_EstacionesAct = new System.Windows.Forms.Label();
             this.listView_estacionesReg = new System.Windows.Forms.ListView();
-            this.Button_Conectar = new System.Windows.Forms.Button();
+            this.Button_Add = new System.Windows.Forms.Button();
             this.textBox_direccion = new System.Windows.Forms.TextBox();
             this.Acciones = new System.Windows.Forms.TabPage();
             this.button_Modificar = new System.Windows.Forms.Button();
@@ -53,19 +53,19 @@
             this.tabControl1.Location = new System.Drawing.Point(4, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(378, 336);
+            this.tabControl1.Size = new System.Drawing.Size(378, 355);
             this.tabControl1.TabIndex = 0;
             // 
             // Estaciones
             // 
             this.Estaciones.Controls.Add(this.label_EstacionesAct);
             this.Estaciones.Controls.Add(this.listView_estacionesReg);
-            this.Estaciones.Controls.Add(this.Button_Conectar);
+            this.Estaciones.Controls.Add(this.Button_Add);
             this.Estaciones.Controls.Add(this.textBox_direccion);
             this.Estaciones.Location = new System.Drawing.Point(4, 22);
             this.Estaciones.Name = "Estaciones";
             this.Estaciones.Padding = new System.Windows.Forms.Padding(3);
-            this.Estaciones.Size = new System.Drawing.Size(370, 310);
+            this.Estaciones.Size = new System.Drawing.Size(370, 329);
             this.Estaciones.TabIndex = 0;
             this.Estaciones.Text = "Estaciones";
             this.Estaciones.UseVisualStyleBackColor = true;
@@ -88,15 +88,15 @@
             this.listView_estacionesReg.TabIndex = 2;
             this.listView_estacionesReg.UseCompatibleStateImageBehavior = false;
             // 
-            // Button_Conectar
+            // Button_Add
             // 
-            this.Button_Conectar.Location = new System.Drawing.Point(289, 31);
-            this.Button_Conectar.Name = "Button_Conectar";
-            this.Button_Conectar.Size = new System.Drawing.Size(75, 23);
-            this.Button_Conectar.TabIndex = 1;
-            this.Button_Conectar.Text = "Conectar";
-            this.Button_Conectar.UseVisualStyleBackColor = true;
-            this.Button_Conectar.Click += new System.EventHandler(this.Button_Conectar_Click);
+            this.Button_Add.Location = new System.Drawing.Point(289, 31);
+            this.Button_Add.Name = "Button_Add";
+            this.Button_Add.Size = new System.Drawing.Size(75, 23);
+            this.Button_Add.TabIndex = 1;
+            this.Button_Add.Text = "Añadir";
+            this.Button_Add.UseVisualStyleBackColor = true;
+            this.Button_Add.Click += new System.EventHandler(this.Button_Add_Click);
             // 
             // textBox_direccion
             // 
@@ -117,23 +117,24 @@
             this.Acciones.Location = new System.Drawing.Point(4, 22);
             this.Acciones.Name = "Acciones";
             this.Acciones.Padding = new System.Windows.Forms.Padding(3);
-            this.Acciones.Size = new System.Drawing.Size(370, 310);
+            this.Acciones.Size = new System.Drawing.Size(370, 329);
             this.Acciones.TabIndex = 1;
             this.Acciones.Text = "Acciones";
             this.Acciones.UseVisualStyleBackColor = true;
             // 
             // button_Modificar
             // 
-            this.button_Modificar.Location = new System.Drawing.Point(179, 212);
+            this.button_Modificar.Location = new System.Drawing.Point(179, 156);
             this.button_Modificar.Name = "button_Modificar";
             this.button_Modificar.Size = new System.Drawing.Size(101, 23);
             this.button_Modificar.TabIndex = 5;
             this.button_Modificar.Text = "Modificar";
             this.button_Modificar.UseVisualStyleBackColor = true;
+            this.button_Modificar.Click += new System.EventHandler(this.button_Modificar_Click);
             // 
             // textBox_NuevoValor
             // 
-            this.textBox_NuevoValor.Location = new System.Drawing.Point(21, 214);
+            this.textBox_NuevoValor.Location = new System.Drawing.Point(21, 159);
             this.textBox_NuevoValor.Name = "textBox_NuevoValor";
             this.textBox_NuevoValor.Size = new System.Drawing.Size(152, 20);
             this.textBox_NuevoValor.TabIndex = 4;
@@ -142,7 +143,7 @@
             // 
             this.label_resultados.AutoSize = true;
             this.label_resultados.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_resultados.Location = new System.Drawing.Point(21, 146);
+            this.label_resultados.Location = new System.Drawing.Point(18, 197);
             this.label_resultados.Name = "label_resultados";
             this.label_resultados.Size = new System.Drawing.Size(77, 16);
             this.label_resultados.TabIndex = 3;
@@ -182,7 +183,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(385, 352);
+            this.ClientSize = new System.Drawing.Size(385, 370);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -200,7 +201,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage Estaciones;
         private System.Windows.Forms.TabPage Acciones;
-        private System.Windows.Forms.Button Button_Conectar;
+        private System.Windows.Forms.Button Button_Add;
         private System.Windows.Forms.TextBox textBox_direccion;
         private System.Windows.Forms.Label label_EstacionesAct;
         private System.Windows.Forms.ListView listView_estacionesReg;
