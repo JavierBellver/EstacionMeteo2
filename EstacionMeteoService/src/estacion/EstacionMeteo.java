@@ -8,10 +8,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import java.io.FileWriter;
 
-public class EstacionMeteo extends UnicastRemoteObject implements Serializable
+public class EstacionMeteo implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	//Parametros
@@ -20,12 +21,12 @@ public class EstacionMeteo extends UnicastRemoteObject implements Serializable
     private int lum;
     private String pantalla;
     private String NArchivo;
+    private String Nombre_maquina;
     
-
-    //Constructor
-    public EstacionMeteo (String Archivo) throws RemoteException, FileNotFoundException, IOException
+    public EstacionMeteo () throws FileNotFoundException, IOException
     {
-        NArchivo=Archivo+".txt";
+    	Nombre_maquina = "estacion";
+    	NArchivo = Nombre_maquina+".txt";
         int[] Contenido=muestraContenido(NArchivo);
         temp=Contenido[0];
         hum=Contenido[1];
@@ -33,7 +34,7 @@ public class EstacionMeteo extends UnicastRemoteObject implements Serializable
         pantalla="";
     }
 
-    //getters y setters
+  //getters y setters
     public int getTemperatura()
     {
         return temp;
@@ -122,6 +123,11 @@ public class EstacionMeteo extends UnicastRemoteObject implements Serializable
             msg="Valor de mensaje demasiado largo.Introduzca un mensaje de menos de 150 caracteres.\n";
         }
         return msg;
+    }
+
+    public String getNombreMaquina()
+    {
+        return Nombre_maquina;
     } 
 
      public int[] muestraContenido(String archivo) throws FileNotFoundException, IOException, RemoteException 
@@ -129,7 +135,16 @@ public class EstacionMeteo extends UnicastRemoteObject implements Serializable
         int[] valores=new int[3];
         int i=0;
         String cadena;
-        FileReader f = new FileReader(archivo);
+        FileReader f;
+        try
+        {
+            f = new FileReader(archivo);
+        }
+        catch(FileNotFoundException e)
+        {
+            EscribirFichero();
+        }
+        f = new FileReader(archivo);
         BufferedReader b = new BufferedReader(f);
         while((cadena = b.readLine())!=null) {
             valores[i]=Integer.parseInt(cadena.split("=")[1]);
@@ -200,5 +215,16 @@ public class EstacionMeteo extends UnicastRemoteObject implements Serializable
         } catch (Exception ex) {
             System.out.println("Mensaje de la excepción: " + ex.getMessage());
         }
+    }
+
+    public void EscribirFichero() throws IOException, FileNotFoundException
+    {
+        File fichero = new File(NArchivo);
+        fichero.createNewFile();
+        PrintWriter writer = new PrintWriter(NArchivo,"UTF-8");
+        writer.println("Temperatura=10");
+        writer.println("Humedad=20");
+        writer.println("Luminosidad=100");
+        writer.close();
     }
 }
