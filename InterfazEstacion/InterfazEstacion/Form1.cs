@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
+using System.Net;
 
 namespace InterfazEstacion
 {
@@ -19,49 +20,88 @@ namespace InterfazEstacion
         public Form1()
         {
             InitializeComponent();
-            maquina_seleccionada = new EstMeteo.EstacionMeteo();
         }
 
         private void button_Consultar_Click(object sender, EventArgs e)
         {
-            int res=0;
-            switch (comboBox_Atributo.Text)
+            try
             {
-                case "Temperatura":
-                    res = maquina_seleccionada.getTemperatura();
-                    label_resultados.Text = "Temperatura=";
-                    break;
-                case "Humedad":
-                    res = maquina_seleccionada.getHumedad();
-                    label_resultados.Text = "Humedad=";
-                    break;
-                case "Luminosidad":
-                    res = maquina_seleccionada.getLuminosidad();
-                    label_resultados.Text = "Luminosidad=";
-                    break;
+                int res=0;
+                switch (comboBox_Atributo.Text)
+                {
+                    case "Temperatura":
+                        res = maquina_seleccionada.getTemperatura();
+                        label_resultados.Text = "Temperatura="+res;
+                        break;
+                    case "Humedad":
+                        res = maquina_seleccionada.getHumedad();
+                        label_resultados.Text = "Humedad="+res;
+                        break;
+                    case "Luminosidad":
+                        res = maquina_seleccionada.getLuminosidad();
+                        label_resultados.Text = "Luminosidad="+res;
+                        break;
+                    case "Pantalla":
+                        label_resultados.Text = "Pantalla=" + maquina_seleccionada.getPantalla();
+                        break;
+                }
             }
-            label_resultados.Text = label_resultados.Text + res;
+            catch(WebException)
+            {
+                System.Windows.Forms.MessageBox.Show("Error: servicio innaccesible");
+            }
+            catch(NullReferenceException)
+            {
+                System.Windows.Forms.MessageBox.Show("Error: debe especificar un servicio");
+            }
+            catch(Exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Error: Error no identificado");
+            }
         }
 
 
 
         private void button_Modificar_Click(object sender, EventArgs e)
         {
-            string res = "La operación fallo";
-            switch (comboBox_Atributo.Text)
+            try
             {
-                case "Temperatura":
-                    res = maquina_seleccionada.setTemperatura(Int32.Parse(textBox_NuevoValor.Text));
-                    label_resultados.Text = res;
-                    break;
-                case "Humedad":
-                    res = maquina_seleccionada.setHumedad(Int32.Parse(textBox_NuevoValor.Text));
-                    label_resultados.Text = res;
-                    break;
-                case "Luminosidad":
-                    res = maquina_seleccionada.setLuminosidad(Int32.Parse(textBox_NuevoValor.Text));
-                    label_resultados.Text = res;
-                    break;
+                string res = "La operación fallo";
+                switch (comboBox_Atributo.Text)
+                {
+                    case "Temperatura":
+                        res = maquina_seleccionada.setTemperatura(Int32.Parse(textBox_NuevoValor.Text));
+                        label_resultados.Text = res;
+                        break;
+                    case "Humedad":
+                        res = maquina_seleccionada.setHumedad(Int32.Parse(textBox_NuevoValor.Text));
+                        label_resultados.Text = res;
+                        break;
+                    case "Luminosidad":
+                        res = maquina_seleccionada.setLuminosidad(Int32.Parse(textBox_NuevoValor.Text));
+                        label_resultados.Text = res;
+                        break;
+                    case "Pantalla":
+                        res = maquina_seleccionada.setMsg(textBox_NuevoValor.Text);
+                        label_resultados.Text = res;
+                        break;
+                }
+            }
+            catch (WebException)
+            {
+                System.Windows.Forms.MessageBox.Show("Error: servicio innaccesible");
+            }
+            catch (NullReferenceException)
+            {
+                System.Windows.Forms.MessageBox.Show("Error: debe especificar un servicio");
+            }
+            catch (FormatException)
+            {
+                System.Windows.Forms.MessageBox.Show("Error: parametro de entrada incorrecto o vacío");
+            }
+            catch (Exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Error: Error no identificado");
             }
         }
 
@@ -71,15 +111,29 @@ namespace InterfazEstacion
             comboBox_Estacion.Items.Insert(comboBox_Estacion.Items.Count, textBox_direccion.Text);
         }
 
-        private void conectar_button_Click(object sender, EventArgs e)
+        private void conectar_acciones_Click(object sender, EventArgs e)
         {
-            string url_servicio = "http://" + textBox_direccion.Text + "/EstacionMeteoService/services/EstacionMeteo?wsdl";
-            maquina_seleccionada.Url = url_servicio;
-        }
-
-        private void listView_estacionesReg_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            maquina_seleccionada.Url = "http://" + listView_estacionesReg.SelectedItems[0].Text + "/EstacionMeteoService/services/EstacionMeteo?wsdl"; ;
+            try
+            {
+                maquina_seleccionada = new EstMeteo.EstacionMeteo();
+                string url_servicio = "http://" + comboBox_Estacion.Text + "/EstacionMeteoService/services/EstacionMeteo?wsdl";
+                maquina_seleccionada.Url = url_servicio;
+                WebRequest request = WebRequest.Create(url_servicio);
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                maquina_seleccionada.Url = url_servicio;
+            }
+            catch (WebException)
+            {
+                System.Windows.Forms.MessageBox.Show("Error: servicio innaccesible o no existente");
+            }
+            catch (UriFormatException)
+            {
+                System.Windows.Forms.MessageBox.Show("Error: debe especificar un servicio");
+            }
+            catch (Exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Error: Error no identificado");
+            }
         }
     }
 }

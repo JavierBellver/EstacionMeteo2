@@ -35,13 +35,13 @@
             this.Button_Add = new System.Windows.Forms.Button();
             this.textBox_direccion = new System.Windows.Forms.TextBox();
             this.Acciones = new System.Windows.Forms.TabPage();
+            this.conectar_acciones = new System.Windows.Forms.Button();
             this.button_Modificar = new System.Windows.Forms.Button();
             this.textBox_NuevoValor = new System.Windows.Forms.TextBox();
             this.label_resultados = new System.Windows.Forms.Label();
             this.button_Consultar = new System.Windows.Forms.Button();
             this.comboBox_Atributo = new System.Windows.Forms.ComboBox();
             this.comboBox_Estacion = new System.Windows.Forms.ComboBox();
-            this.conectar_button = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.Estaciones.SuspendLayout();
             this.Acciones.SuspendLayout();
@@ -59,7 +59,6 @@
             // 
             // Estaciones
             // 
-            this.Estaciones.Controls.Add(this.conectar_button);
             this.Estaciones.Controls.Add(this.label_EstacionesAct);
             this.Estaciones.Controls.Add(this.listView_estacionesReg);
             this.Estaciones.Controls.Add(this.Button_Add);
@@ -89,11 +88,11 @@
             this.listView_estacionesReg.Size = new System.Drawing.Size(263, 213);
             this.listView_estacionesReg.TabIndex = 2;
             this.listView_estacionesReg.UseCompatibleStateImageBehavior = false;
-            this.listView_estacionesReg.SelectedIndexChanged += new System.EventHandler(this.listView_estacionesReg_SelectedIndexChanged);
+            this.listView_estacionesReg.View = System.Windows.Forms.View.List;
             // 
             // Button_Add
             // 
-            this.Button_Add.Location = new System.Drawing.Point(289, 31);
+            this.Button_Add.Location = new System.Drawing.Point(289, 34);
             this.Button_Add.Name = "Button_Add";
             this.Button_Add.Size = new System.Drawing.Size(75, 23);
             this.Button_Add.TabIndex = 1;
@@ -111,6 +110,7 @@
             // 
             // Acciones
             // 
+            this.Acciones.Controls.Add(this.conectar_acciones);
             this.Acciones.Controls.Add(this.button_Modificar);
             this.Acciones.Controls.Add(this.textBox_NuevoValor);
             this.Acciones.Controls.Add(this.label_resultados);
@@ -124,6 +124,16 @@
             this.Acciones.TabIndex = 1;
             this.Acciones.Text = "Acciones";
             this.Acciones.UseVisualStyleBackColor = true;
+            // 
+            // conectar_acciones
+            // 
+            this.conectar_acciones.Location = new System.Drawing.Point(179, 34);
+            this.conectar_acciones.Name = "conectar_acciones";
+            this.conectar_acciones.Size = new System.Drawing.Size(101, 23);
+            this.conectar_acciones.TabIndex = 6;
+            this.conectar_acciones.Text = "Conectar";
+            this.conectar_acciones.UseVisualStyleBackColor = true;
+            this.conectar_acciones.Click += new System.EventHandler(this.conectar_acciones_Click);
             // 
             // button_Modificar
             // 
@@ -168,8 +178,9 @@
             this.comboBox_Atributo.Items.AddRange(new object[] {
             "Temperatura",
             "Humedad",
-            "Luminosidad"});
-            this.comboBox_Atributo.Location = new System.Drawing.Point(21, 91);
+            "Luminosidad",
+            "Pantalla"});
+            this.comboBox_Atributo.Location = new System.Drawing.Point(21, 93);
             this.comboBox_Atributo.Name = "comboBox_Atributo";
             this.comboBox_Atributo.Size = new System.Drawing.Size(152, 21);
             this.comboBox_Atributo.TabIndex = 1;
@@ -182,16 +193,6 @@
             this.comboBox_Estacion.Size = new System.Drawing.Size(152, 21);
             this.comboBox_Estacion.TabIndex = 0;
             // 
-            // conectar_button
-            // 
-            this.conectar_button.Location = new System.Drawing.Point(289, 91);
-            this.conectar_button.Name = "conectar_button";
-            this.conectar_button.Size = new System.Drawing.Size(75, 23);
-            this.conectar_button.TabIndex = 4;
-            this.conectar_button.Text = "Conectar";
-            this.conectar_button.UseVisualStyleBackColor = true;
-            this.conectar_button.Click += new System.EventHandler(this.conectar_button_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -199,7 +200,7 @@
             this.ClientSize = new System.Drawing.Size(385, 370);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Interfaz Estaciones";
             this.tabControl1.ResumeLayout(false);
             this.Estaciones.ResumeLayout(false);
             this.Estaciones.PerformLayout();
@@ -224,7 +225,7 @@
         private System.Windows.Forms.Button button_Consultar;
         private System.Windows.Forms.ComboBox comboBox_Atributo;
         private System.Windows.Forms.ComboBox comboBox_Estacion;
-        private System.Windows.Forms.Button conectar_button;
+        private System.Windows.Forms.Button conectar_acciones;
     }
 }
 
