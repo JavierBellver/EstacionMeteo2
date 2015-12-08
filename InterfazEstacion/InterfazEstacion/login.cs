@@ -25,6 +25,10 @@ namespace InterfazEstacion
                 principal.Show();
                 this.Visible = false;
             }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Error: Usuario y/o password incorrecto");
+            }
         }
     }
 }
