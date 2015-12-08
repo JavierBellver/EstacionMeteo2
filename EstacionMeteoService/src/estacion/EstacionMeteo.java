@@ -27,11 +27,11 @@ public class EstacionMeteo implements Serializable
     {
     	Nombre_maquina = "estacion";
     	NArchivo = Nombre_maquina+".txt";
-        int[] Contenido=muestraContenido(NArchivo);
-        temp=Contenido[0];
-        hum=Contenido[1];
-        lum=Contenido[2];
-        pantalla="";
+        String[] Contenido=muestraContenido(NArchivo);
+        temp=Integer.parseInt(Contenido[0]);
+        hum=Integer.parseInt(Contenido[1]);
+        lum=Integer.parseInt(Contenido[2]);
+        pantalla=Contenido[3];
     }
 
   //getters y setters
@@ -58,13 +58,13 @@ public class EstacionMeteo implements Serializable
     public String setTemperatura(int newTemp)
     {
         String msg;
-        int[] valores=new int[3];
+        String[] valores=new String[4];
         if(newTemp>=-30 && newTemp<=50)
         {
             temp=newTemp;
             
             msg="Valor de Temperatura modificado a "+newTemp+" con exito.\n";
-            valores=Lectura("Temperatura", newTemp);
+            valores=Lectura("Temperatura", String.valueOf(newTemp));
             Modifica(valores);
         }
         else
@@ -77,12 +77,12 @@ public class EstacionMeteo implements Serializable
     public String setHumedad(int newHum)
     {
         String msg;
-        int[] valores=new int[3];
+        String[] valores=new String[4];
         if(newHum>=0 && newHum<=100)
         {
             hum=newHum;
             msg="Valor de Humedad modificado a "+newHum+" con exito.\n";
-            valores=Lectura("Humedad", newHum);
+            valores=Lectura("Humedad", String.valueOf(newHum));
             Modifica(valores);
         }
         else
@@ -95,12 +95,12 @@ public class EstacionMeteo implements Serializable
     public String setLuminosidad(int newLum)
     {
         String msg;
-        int[] valores=new int[3];
+        String[] valores=new String[4];
         if(newLum>=0 && newLum<=800)
         {
             lum=newLum;
             msg="Valor de luminosidad modificado a "+newLum+" con exito.\n";
-            valores=Lectura("Luminosidad", newLum);
+            valores=Lectura("Luminosidad", String.valueOf(newLum));
             Modifica(valores);
         }
         else
@@ -113,10 +113,13 @@ public class EstacionMeteo implements Serializable
     public String setMsg(String newMsg)
     {
         String msg;
+        String[] valores=new String[4];
         if(newMsg.length()<=150)
         {
             pantalla=newMsg;
             msg="Mensaje cambiado correctamente.\n";
+            valores=Lectura("Pantalla", newMsg);
+            Modifica(valores);
         }
         else
         {
@@ -130,9 +133,9 @@ public class EstacionMeteo implements Serializable
         return Nombre_maquina;
     } 
 
-     public int[] muestraContenido(String archivo) throws FileNotFoundException, IOException, RemoteException 
+     public String[] muestraContenido(String archivo) throws FileNotFoundException, IOException, RemoteException 
      {
-        int[] valores=new int[3];
+        String[] valores=new String[4];
         int i=0;
         String cadena;
         FileReader f;
@@ -147,7 +150,7 @@ public class EstacionMeteo implements Serializable
         f = new FileReader(archivo);
         BufferedReader b = new BufferedReader(f);
         while((cadena = b.readLine())!=null) {
-            valores[i]=Integer.parseInt(cadena.split("=")[1]);
+            valores[i]=cadena.split("=")[1];
             i++;
         }
         b.close();
@@ -156,10 +159,10 @@ public class EstacionMeteo implements Serializable
       ////////////////////////////////////
      //FUNCIONES DE LECTURA Y ESCRITURA//
     ////////////////////////////////////
-    public int[] Lectura(String Atributo, int nValor) {
+    public String[] Lectura(String Atributo, String nValor) {
 
         // Fichero del que queremos leer
-        int[] valores=new int[3];
+        String[] valores=new String[4];
         int i=0;
         File fichero = new File(NArchivo);
         Scanner s = null;
@@ -178,7 +181,7 @@ public class EstacionMeteo implements Serializable
                 }
                 else
                 {
-                    valores[i]=Integer.parseInt(linea.split("=")[1]);
+                    valores[i]=linea.split("=")[1];
                     i++;
                 }
             }
@@ -197,8 +200,8 @@ public class EstacionMeteo implements Serializable
         return valores;
     }
 
-    public void Modifica(int[] valores) {
-        String[] lineas = { "Temperatura="+valores[0], "Humedad="+valores[1], "Luminosidad="+valores[2] };
+    public void Modifica(String[] valores) {
+        String[] lineas = { "Temperatura="+valores[0], "Humedad="+valores[1], "Luminosidad="+valores[2], "Pantalla="+valores[3]};
 
         FileWriter fichero = null;
         try {
@@ -225,6 +228,7 @@ public class EstacionMeteo implements Serializable
         writer.println("Temperatura=10");
         writer.println("Humedad=20");
         writer.println("Luminosidad=100");
+        writer.println("Pantalla=null");
         writer.close();
     }
 }

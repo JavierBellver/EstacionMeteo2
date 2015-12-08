@@ -70,6 +70,7 @@
             this.Estaciones.TabIndex = 0;
             this.Estaciones.Text = "Estaciones";
             this.Estaciones.UseVisualStyleBackColor = true;
+            this.Estaciones.Click += new System.EventHandler(this.Estaciones_Click);
             // 
             // label_EstacionesAct
             // 
