@@ -25,3 +25,4 @@ C:\Users\Carlos\EstacionMeteo2\InterfazEstacion\InterfazEstacion\obj\Debug\Inter
 C:\Users\Carlos\EstacionMeteo2\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.csproj.GenerateResource.Cache
 C:\Users\Carlos\EstacionMeteo2\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.exe
 C:\Users\Carlos\EstacionMeteo2\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.pdb
+D:\JB-COSAS\Universidad\SD\prac2\Proyecto\EstacionMeteo2\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.login.resources
