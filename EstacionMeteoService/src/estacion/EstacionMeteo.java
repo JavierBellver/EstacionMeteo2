@@ -4,13 +4,22 @@ import java.io.Serializable;
 import java.rmi.*;
 import java.rmi.server.*;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.File;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.Scanner;
 import java.io.FileWriter;
+
+import javax.annotation.Resource;
+import javax.jws.WebMethod;
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.ws.WebServiceContext;
+import javax.xml.ws.handler.MessageContext;
 
 public class EstacionMeteo implements Serializable
 {
@@ -22,6 +31,8 @@ public class EstacionMeteo implements Serializable
     private String pantalla;
     private String NArchivo;
     private String Nombre_maquina;
+    private String ip;
+    WebServiceContext context;
     
     public EstacionMeteo () throws FileNotFoundException, IOException
     {
@@ -32,26 +43,35 @@ public class EstacionMeteo implements Serializable
         hum=Integer.parseInt(Contenido[1]);
         lum=Integer.parseInt(Contenido[2]);
         pantalla=Contenido[3];
+        ip = "127.0.0.1";
+        if(!new File(Nombre_maquina+"-log.txt").isFile())
+        {
+            EscribirLog();
+        }
     }
 
   //getters y setters
     public int getTemperatura()
     {
+    	actualizarLog("get | Temperatura","ninguno","root",ip);
         return temp;
     }
     
     public int getHumedad()
     {
+    	actualizarLog("get | Humedad","ninguno","root",ip);
         return hum;
     }
     
     public int getLuminosidad()
     {
+    	actualizarLog("get | Luminosidad","ninguno","root",ip);
         return lum;
     }
     
     public String getPantalla()
     {
+    	actualizarLog("get | Pantalla","ninguno","root",ip);
         return pantalla;
     }
     
@@ -66,6 +86,7 @@ public class EstacionMeteo implements Serializable
             msg="Valor de Temperatura modificado a "+newTemp+" con exito.\n";
             valores=Lectura("Temperatura", String.valueOf(newTemp));
             Modifica(valores);
+            actualizarLog("set | Temperatura",String.valueOf(newTemp),"root",ip);
         }
         else
         {
@@ -84,6 +105,7 @@ public class EstacionMeteo implements Serializable
             msg="Valor de Humedad modificado a "+newHum+" con exito.\n";
             valores=Lectura("Humedad", String.valueOf(newHum));
             Modifica(valores);
+            actualizarLog("set | Humedad",String.valueOf(newHum),"root",ip);
         }
         else
         {
@@ -102,6 +124,7 @@ public class EstacionMeteo implements Serializable
             msg="Valor de luminosidad modificado a "+newLum+" con exito.\n";
             valores=Lectura("Luminosidad", String.valueOf(newLum));
             Modifica(valores);
+            actualizarLog("set | Luminosidad",String.valueOf(newLum),"root",ip);
         }
         else
         {
@@ -120,6 +143,7 @@ public class EstacionMeteo implements Serializable
             msg="Mensaje cambiado correctamente.\n";
             valores=Lectura("Pantalla", newMsg);
             Modifica(valores);
+            actualizarLog("set | Pantalla",String.valueOf(newMsg),"root",ip);
         }
         else
         {
@@ -230,5 +254,39 @@ public class EstacionMeteo implements Serializable
         writer.println("Luminosidad=100");
         writer.println("Pantalla=null");
         writer.close();
+    }
+    
+    private void EscribirLog() throws IOException, FileNotFoundException
+    {
+        Date date = new Date();
+        String nombre_log = Nombre_maquina+"-log.txt";
+        File fichero = new File(nombre_log);
+        fichero.createNewFile();
+        PrintWriter writer = new PrintWriter(nombre_log,"UTF-8");
+        writer.println("# Sistema de log del servicio");
+        writer.println("# Campos en orden: Fecha, usuario@ip, Acción, Parámetros");
+        writer.close();
+    }
+    
+    private void actualizarLog(String nombre_metodo,String parametro,String usuario,String ip)
+    {
+    	try {
+        	Date date = new Date();
+        	FileWriter fichero = new FileWriter(Nombre_maquina+"-log.txt",true);
+        	BufferedWriter out = new BufferedWriter(fichero);
+        	out.write("["+date+"] "+usuario+"@"+ip+" || "+nombre_metodo+"->"+parametro+"\n");
+        	out.newLine();
+        	out.flush();
+        	out.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }
