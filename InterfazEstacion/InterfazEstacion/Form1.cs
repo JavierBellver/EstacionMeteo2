@@ -10,6 +10,9 @@ using System.IO;
 using System.Windows.Forms;
 using System.Net;
 using System.Net.Sockets;
+using System.Security.Cryptography;
+
+
 
 namespace InterfazEstacion
 {
@@ -20,32 +23,34 @@ namespace InterfazEstacion
         String usuario;
         String IP;
         bool Sesion;
+        Dictionary<String, String> estaciones;
 
         public Form1(String nUsuario)
         {
             InitializeComponent();
             usuario = nUsuario;
             IP=Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString();
-            Sesion = true;        
+            Sesion = true;
+            estaciones=new Dictionary<string,string>();
         }
 
         private void button_Consultar_Click(object sender, EventArgs e)
         {
             try
             {
-                int res=0;
+                String res="";
                 switch (comboBox_Atributo.Text)
                 {
                     case "Temperatura":
-                        res = maquina_seleccionada.getTemperatura();
+                        res = maquina_seleccionada.getTemperatura().ToString();
                         label_resultados.Text = "Temperatura="+res;
                         break;
                     case "Humedad":
-                        res = maquina_seleccionada.getHumedad();
+                        res = maquina_seleccionada.getHumedad().ToString();
                         label_resultados.Text = "Humedad="+res;
                         break;
                     case "Luminosidad":
-                        res = maquina_seleccionada.getLuminosidad();
+                        res = maquina_seleccionada.getLuminosidad().ToString();
                         label_resultados.Text = "Luminosidad="+res;
                         break;
                     case "Pantalla":
@@ -80,6 +85,7 @@ namespace InterfazEstacion
             try
             {
                 string res = "La operación fallo";
+                
                 switch (comboBox_Atributo.Text)
                 {
                     case "Temperatura":
@@ -101,10 +107,10 @@ namespace InterfazEstacion
                 }
                 if (Sesion)
                 {
-                    actualiza_log(false, Sesion);
+                    actualiza_log(true, Sesion);
                     Sesion = false;
                 }
-                else actualiza_log(false, Sesion);
+                else actualiza_log(true, Sesion);
             }
             catch (WebException)
             {
@@ -123,19 +129,24 @@ namespace InterfazEstacion
                 System.Windows.Forms.MessageBox.Show("Error: Error no identificado");
             }
         }
-
         private void Button_Add_Click(object sender, EventArgs e)
         {
+
+
+            String est="estacion"+(listView_estacionesReg.Items.Count+1);
             listView_estacionesReg.Items.Add(textBox_direccion.Text);
-            comboBox_Estacion.Items.Insert(comboBox_Estacion.Items.Count, textBox_direccion.Text);
+            estaciones.Add(est, textBox_direccion.Text.ToString());
+            comboBox_Estacion.Items.Insert(comboBox_Estacion.Items.Count, est);
         }
 
         private void conectar_acciones_Click(object sender, EventArgs e)
         {
             try
             {
+                string estacion;
+                estaciones.TryGetValue(comboBox_Estacion.Text, out estacion);
                 maquina_seleccionada = new EstMeteo.EstacionMeteo();
-                string url_servicio = "http://" + comboBox_Estacion.Text + "/EstacionMeteoService/services/EstacionMeteo?wsdl";
+                string url_servicio = "http://" + estacion + "/EstacionMeteoService/services/EstacionMeteo?wsdl";
                 maquina_seleccionada.Url = url_servicio;
                 WebRequest request = WebRequest.Create(url_servicio);
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -179,15 +190,29 @@ namespace InterfazEstacion
             }
             if(!escritura)
             {
-                entrada = "[" + fecha + "] " + usuario + "@" + IP + "|| " + "get |" + comboBox_Atributo.Text;
+                entrada = "[" + fecha + "] " + usuario + "@" + IP + "|| "+ comboBox_Estacion.Text + " |get| " + comboBox_Atributo.Text;
             }
             else
             {
-                entrada = "[" + fecha + "] " + usuario + "@" + IP + "|| " + "set |" + comboBox_Atributo.Text+"->"+textBox_NuevoValor.Text;
+                entrada = "[" + fecha + "] " + usuario + "@" + IP + "|| " +comboBox_Estacion.Text+" |set| " + comboBox_Atributo.Text+"->"+textBox_NuevoValor.Text;
             }
             archivo.WriteLine(entrada,true);
             archivo.Close();
 
         }
+        public static string MD5Encrypt(string value)
+        {
+            MD5CryptoServiceProvider provider = new MD5CryptoServiceProvider();
+
+            byte[] data = System.Text.Encoding.ASCII.GetBytes(value);
+            data = provider.ComputeHash(data);
+
+            string md5 = string.Empty;
+
+            for (int i = 0; i < data.Length; i++)
+                md5 += data[i].ToString("x2").ToLower();
+
+            return md5;
+        }  
     }
 }

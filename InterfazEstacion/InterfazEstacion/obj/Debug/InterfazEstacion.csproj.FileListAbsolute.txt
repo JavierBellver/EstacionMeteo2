@@ -27,3 +27,13 @@ C:\Users\Carlos\EstacionMeteo2\InterfazEstacion\InterfazEstacion\obj\Debug\Inter
 C:\Users\Carlos\EstacionMeteo2\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.pdb
 D:\JB-COSAS\Universidad\SD\prac2\Proyecto\EstacionMeteo2\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.login.resources
 C:\Users\Carlos\EstacionMeteo2\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.login.resources
+C:\Users\EPS\Downloads\EstacionMeteo2-master\InterfazEstacion\InterfazEstacion\bin\Debug\InterfazEstacion.exe.config
+C:\Users\EPS\Downloads\EstacionMeteo2-master\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.exe
+C:\Users\EPS\Downloads\EstacionMeteo2-master\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.pdb
+C:\Users\EPS\Downloads\EstacionMeteo2-master\InterfazEstacion\InterfazEstacion\bin\Debug\InterfazEstacion.exe
+C:\Users\EPS\Downloads\EstacionMeteo2-master\InterfazEstacion\InterfazEstacion\bin\Debug\InterfazEstacion.pdb
+C:\Users\EPS\Downloads\EstacionMeteo2-master\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.csprojResolveAssemblyReference.cache
+C:\Users\EPS\Downloads\EstacionMeteo2-master\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.Form1.resources
+C:\Users\EPS\Downloads\EstacionMeteo2-master\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.login.resources
+C:\Users\EPS\Downloads\EstacionMeteo2-master\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.Properties.Resources.resources
+C:\Users\EPS\Downloads\EstacionMeteo2-master\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.csproj.GenerateResource.Cache
