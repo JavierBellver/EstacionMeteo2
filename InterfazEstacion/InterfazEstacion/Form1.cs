@@ -19,12 +19,14 @@ namespace InterfazEstacion
         EstMeteo.EstacionMeteo maquina_seleccionada;
         String usuario;
         String IP;
+        bool Sesion;
 
         public Form1(String nUsuario)
         {
             InitializeComponent();
             usuario = nUsuario;
             IP=Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString();
+            Sesion = true;        
         }
 
         private void button_Consultar_Click(object sender, EventArgs e)
@@ -50,7 +52,12 @@ namespace InterfazEstacion
                         label_resultados.Text = "Pantalla=" + maquina_seleccionada.getPantalla();
                         break;
                 }
-               actualiza_log(false);
+                if (Sesion)
+                {
+                    actualiza_log(false,Sesion);
+                    Sesion = false;
+                }
+                else actualiza_log(false, Sesion);
             }
             catch(WebException)
             {
@@ -92,7 +99,12 @@ namespace InterfazEstacion
                         label_resultados.Text = res;
                         break;
                 }
-                actualiza_log(true);
+                if (Sesion)
+                {
+                    actualiza_log(false, Sesion);
+                    Sesion = false;
+                }
+                else actualiza_log(false, Sesion);
             }
             catch (WebException)
             {
@@ -142,22 +154,29 @@ namespace InterfazEstacion
                 System.Windows.Forms.MessageBox.Show("Error: Error no identificado");
             }
         }
-        private void actualiza_log(bool escritura)
+
+        private void actualiza_log(bool escritura,bool Sesion)
         {
             
             String entrada = "";
             String fecha=DateTime.Now.ToString();
-            String nombre=usuario+"_log_"+fecha+".txt";
             StreamWriter archivo;
 
-            if (!File.Exists("prueba2.txt"))
+            if (!File.Exists("log.txt"))
+            {
+                archivo=File.CreateText("log.txt");
+            }
+            else archivo = new StreamWriter("log.txt",true);
+
+            if (Sesion)
             {
                 String s = "[" + fecha + "] " + usuario + "@" + IP;
-                archivo=File.CreateText("prueba2.txt");
+                archivo.WriteLine("-------------------------------------------------------------------------", true);
                 archivo.WriteLine(s, true);
                 archivo.WriteLine("-------------------------------------------------------------------------", true);
+                s = "";
+                Sesion = false;
             }
-            else archivo = new StreamWriter("prueba2.txt",true);
             if(!escritura)
             {
                 entrada = "[" + fecha + "] " + usuario + "@" + IP + "|| " + "get |" + comboBox_Atributo.Text;
