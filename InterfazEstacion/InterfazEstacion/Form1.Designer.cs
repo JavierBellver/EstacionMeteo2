@@ -174,6 +174,7 @@
             // 
             // comboBox_Atributo
             // 
+            this.comboBox_Atributo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Atributo.FormattingEnabled = true;
             this.comboBox_Atributo.Items.AddRange(new object[] {
             "Temperatura",
@@ -187,6 +188,7 @@
             // 
             // comboBox_Estacion
             // 
+            this.comboBox_Estacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Estacion.FormattingEnabled = true;
             this.comboBox_Estacion.Location = new System.Drawing.Point(21, 36);
             this.comboBox_Estacion.Name = "comboBox_Estacion";
