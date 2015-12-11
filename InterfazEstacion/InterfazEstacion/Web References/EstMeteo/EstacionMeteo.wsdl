@@ -32,10 +32,61 @@
     <xs:schema xmlns:ax25="http://rmi.java/xsd" xmlns:ax22="http://io.java/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://estacion">
       <xs:import namespace="http://io.java/xsd" />
       <xs:import namespace="http://rmi.java/xsd" />
-      <xs:element name="Modifica">
+      <xs:element name="getTemperatura">
         <xs:complexType>
           <xs:sequence>
-            <xs:element maxOccurs="unbounded" name="valores" type="xs:int" />
+            <xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getTemperaturaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getHumedad">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getHumedadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setLuminosidad">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="newLum" type="xs:int" />
+            <xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setLuminosidadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getNombreMaquina">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getNombreMaquinaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -70,16 +121,42 @@
       <xs:element name="muestraContenidoResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element maxOccurs="unbounded" name="return" type="xs:int" />
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="getTemperatura">
+      <xs:element name="setTemperatura">
         <xs:complexType>
-          <xs:sequence />
+          <xs:sequence>
+            <xs:element name="newTemp" type="xs:int" />
+            <xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
+          </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="getTemperaturaResponse">
+      <xs:element name="setTemperaturaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Modifica">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="valores" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getLuminosidad">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getLuminosidadResponse">
         <xs:complexType>
           <xs:sequence>
             <xs:element name="return" type="xs:int" />
@@ -90,6 +167,8 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element name="newHum" type="xs:int" />
+            <xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -100,36 +179,12 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="getHumedad">
-        <xs:complexType>
-          <xs:sequence />
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="getHumedadResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="return" type="xs:int" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="setLuminosidad">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="newLum" type="xs:int" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="setLuminosidadResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="setMsg">
         <xs:complexType>
           <xs:sequence>
             <xs:element minOccurs="0" name="newMsg" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -142,7 +197,10 @@
       </xs:element>
       <xs:element name="getPantalla">
         <xs:complexType>
-          <xs:sequence />
+          <xs:sequence>
+            <xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
+          </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="getPantallaResponse">
@@ -156,40 +214,14 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element minOccurs="0" name="Atributo" nillable="true" type="xs:string" />
-            <xs:element name="nValor" type="xs:int" />
+            <xs:element minOccurs="0" name="nValor" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="LecturaResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element maxOccurs="unbounded" name="return" type="xs:int" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="setTemperatura">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="newTemp" type="xs:int" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="setTemperaturaResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="getLuminosidad">
-        <xs:complexType>
-          <xs:sequence />
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="getLuminosidadResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="return" type="xs:int" />
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -198,11 +230,11 @@
   <wsdl:message name="ModificaRequest">
     <wsdl:part name="parameters" element="ns:Modifica" />
   </wsdl:message>
-  <wsdl:message name="getPantallaRequest">
-    <wsdl:part name="parameters" element="ns:getPantalla" />
+  <wsdl:message name="setTemperaturaRequest">
+    <wsdl:part name="parameters" element="ns:setTemperatura" />
   </wsdl:message>
-  <wsdl:message name="getPantallaResponse">
-    <wsdl:part name="parameters" element="ns:getPantallaResponse" />
+  <wsdl:message name="setTemperaturaResponse">
+    <wsdl:part name="parameters" element="ns:setTemperaturaResponse" />
   </wsdl:message>
   <wsdl:message name="LecturaRequest">
     <wsdl:part name="parameters" element="ns:Lectura" />
@@ -210,29 +242,41 @@
   <wsdl:message name="LecturaResponse">
     <wsdl:part name="parameters" element="ns:LecturaResponse" />
   </wsdl:message>
-  <wsdl:message name="setTemperaturaRequest">
-    <wsdl:part name="parameters" element="ns:setTemperatura" />
-  </wsdl:message>
-  <wsdl:message name="setTemperaturaResponse">
-    <wsdl:part name="parameters" element="ns:setTemperaturaResponse" />
-  </wsdl:message>
   <wsdl:message name="getHumedadRequest">
     <wsdl:part name="parameters" element="ns:getHumedad" />
   </wsdl:message>
   <wsdl:message name="getHumedadResponse">
     <wsdl:part name="parameters" element="ns:getHumedadResponse" />
   </wsdl:message>
-  <wsdl:message name="getTemperaturaRequest">
-    <wsdl:part name="parameters" element="ns:getTemperatura" />
-  </wsdl:message>
-  <wsdl:message name="getTemperaturaResponse">
-    <wsdl:part name="parameters" element="ns:getTemperaturaResponse" />
-  </wsdl:message>
   <wsdl:message name="setLuminosidadRequest">
     <wsdl:part name="parameters" element="ns:setLuminosidad" />
   </wsdl:message>
   <wsdl:message name="setLuminosidadResponse">
     <wsdl:part name="parameters" element="ns:setLuminosidadResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLuminosidadRequest">
+    <wsdl:part name="parameters" element="ns:getLuminosidad" />
+  </wsdl:message>
+  <wsdl:message name="getLuminosidadResponse">
+    <wsdl:part name="parameters" element="ns:getLuminosidadResponse" />
+  </wsdl:message>
+  <wsdl:message name="getNombreMaquinaRequest">
+    <wsdl:part name="parameters" element="ns:getNombreMaquina" />
+  </wsdl:message>
+  <wsdl:message name="getNombreMaquinaResponse">
+    <wsdl:part name="parameters" element="ns:getNombreMaquinaResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPantallaRequest">
+    <wsdl:part name="parameters" element="ns:getPantalla" />
+  </wsdl:message>
+  <wsdl:message name="getPantallaResponse">
+    <wsdl:part name="parameters" element="ns:getPantallaResponse" />
+  </wsdl:message>
+  <wsdl:message name="getTemperaturaRequest">
+    <wsdl:part name="parameters" element="ns:getTemperatura" />
+  </wsdl:message>
+  <wsdl:message name="getTemperaturaResponse">
+    <wsdl:part name="parameters" element="ns:getTemperaturaResponse" />
   </wsdl:message>
   <wsdl:message name="muestraContenidoRequest">
     <wsdl:part name="parameters" element="ns:muestraContenido" />
@@ -248,12 +292,6 @@
   </wsdl:message>
   <wsdl:message name="EstacionMeteoRemoteException">
     <wsdl:part name="parameters" element="ns:EstacionMeteoRemoteException" />
-  </wsdl:message>
-  <wsdl:message name="getLuminosidadRequest">
-    <wsdl:part name="parameters" element="ns:getLuminosidad" />
-  </wsdl:message>
-  <wsdl:message name="getLuminosidadResponse">
-    <wsdl:part name="parameters" element="ns:getLuminosidadResponse" />
   </wsdl:message>
   <wsdl:message name="setHumedadRequest">
     <wsdl:part name="parameters" element="ns:setHumedad" />
@@ -271,29 +309,37 @@
     <wsdl:operation name="Modifica">
       <wsdl:input wsaw:Action="urn:Modifica" message="ns:ModificaRequest" />
     </wsdl:operation>
-    <wsdl:operation name="getPantalla">
-      <wsdl:input wsaw:Action="urn:getPantalla" message="ns:getPantallaRequest" />
-      <wsdl:output wsaw:Action="urn:getPantallaResponse" message="ns:getPantallaResponse" />
+    <wsdl:operation name="setTemperatura">
+      <wsdl:input wsaw:Action="urn:setTemperatura" message="ns:setTemperaturaRequest" />
+      <wsdl:output wsaw:Action="urn:setTemperaturaResponse" message="ns:setTemperaturaResponse" />
     </wsdl:operation>
     <wsdl:operation name="Lectura">
       <wsdl:input wsaw:Action="urn:Lectura" message="ns:LecturaRequest" />
       <wsdl:output wsaw:Action="urn:LecturaResponse" message="ns:LecturaResponse" />
     </wsdl:operation>
-    <wsdl:operation name="setTemperatura">
-      <wsdl:input wsaw:Action="urn:setTemperatura" message="ns:setTemperaturaRequest" />
-      <wsdl:output wsaw:Action="urn:setTemperaturaResponse" message="ns:setTemperaturaResponse" />
-    </wsdl:operation>
     <wsdl:operation name="getHumedad">
       <wsdl:input wsaw:Action="urn:getHumedad" message="ns:getHumedadRequest" />
       <wsdl:output wsaw:Action="urn:getHumedadResponse" message="ns:getHumedadResponse" />
     </wsdl:operation>
-    <wsdl:operation name="getTemperatura">
-      <wsdl:input wsaw:Action="urn:getTemperatura" message="ns:getTemperaturaRequest" />
-      <wsdl:output wsaw:Action="urn:getTemperaturaResponse" message="ns:getTemperaturaResponse" />
-    </wsdl:operation>
     <wsdl:operation name="setLuminosidad">
       <wsdl:input wsaw:Action="urn:setLuminosidad" message="ns:setLuminosidadRequest" />
       <wsdl:output wsaw:Action="urn:setLuminosidadResponse" message="ns:setLuminosidadResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLuminosidad">
+      <wsdl:input wsaw:Action="urn:getLuminosidad" message="ns:getLuminosidadRequest" />
+      <wsdl:output wsaw:Action="urn:getLuminosidadResponse" message="ns:getLuminosidadResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getNombreMaquina">
+      <wsdl:input wsaw:Action="urn:getNombreMaquina" message="ns:getNombreMaquinaRequest" />
+      <wsdl:output wsaw:Action="urn:getNombreMaquinaResponse" message="ns:getNombreMaquinaResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getPantalla">
+      <wsdl:input wsaw:Action="urn:getPantalla" message="ns:getPantallaRequest" />
+      <wsdl:output wsaw:Action="urn:getPantallaResponse" message="ns:getPantallaResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getTemperatura">
+      <wsdl:input wsaw:Action="urn:getTemperatura" message="ns:getTemperaturaRequest" />
+      <wsdl:output wsaw:Action="urn:getTemperaturaResponse" message="ns:getTemperaturaResponse" />
     </wsdl:operation>
     <wsdl:operation name="muestraContenido">
       <wsdl:input wsaw:Action="urn:muestraContenido" message="ns:muestraContenidoRequest" />
@@ -301,10 +347,6 @@
       <wsdl:fault wsaw:Action="urn:muestraContenidoEstacionMeteoFileNotFoundException" name="EstacionMeteoFileNotFoundException" message="ns:EstacionMeteoFileNotFoundException" />
       <wsdl:fault wsaw:Action="urn:muestraContenidoEstacionMeteoIOException" name="EstacionMeteoIOException" message="ns:EstacionMeteoIOException" />
       <wsdl:fault wsaw:Action="urn:muestraContenidoEstacionMeteoRemoteException" name="EstacionMeteoRemoteException" message="ns:EstacionMeteoRemoteException" />
-    </wsdl:operation>
-    <wsdl:operation name="getLuminosidad">
-      <wsdl:input wsaw:Action="urn:getLuminosidad" message="ns:getLuminosidadRequest" />
-      <wsdl:output wsaw:Action="urn:getLuminosidadResponse" message="ns:getLuminosidadResponse" />
     </wsdl:operation>
     <wsdl:operation name="setHumedad">
       <wsdl:input wsaw:Action="urn:setHumedad" message="ns:setHumedadRequest" />
@@ -323,8 +365,8 @@
         <soap:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="getPantalla">
-      <soap:operation soapAction="urn:getPantalla" style="document" />
+    <wsdl:operation name="setTemperatura">
+      <soap:operation soapAction="urn:setTemperatura" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -341,15 +383,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="setTemperatura">
-      <soap:operation soapAction="urn:setTemperatura" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="getHumedad">
       <soap:operation soapAction="urn:getHumedad" style="document" />
       <wsdl:input>
@@ -359,8 +392,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getTemperatura">
-      <soap:operation soapAction="urn:getTemperatura" style="document" />
+    <wsdl:operation name="setLuminosidad">
+      <soap:operation soapAction="urn:setLuminosidad" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -368,8 +401,35 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="setLuminosidad">
-      <soap:operation soapAction="urn:setLuminosidad" style="document" />
+    <wsdl:operation name="getLuminosidad">
+      <soap:operation soapAction="urn:getLuminosidad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNombreMaquina">
+      <soap:operation soapAction="urn:getNombreMaquina" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPantalla">
+      <soap:operation soapAction="urn:getPantalla" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTemperatura">
+      <soap:operation soapAction="urn:getTemperatura" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -394,15 +454,6 @@
       <wsdl:fault name="EstacionMeteoRemoteException">
         <soap:fault use="literal" name="EstacionMeteoRemoteException" namespace="" />
       </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="getLuminosidad">
-      <soap:operation soapAction="urn:getLuminosidad" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="setHumedad">
       <soap:operation soapAction="urn:setHumedad" style="document" />
@@ -431,8 +482,8 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="getPantalla">
-      <soap12:operation soapAction="urn:getPantalla" style="document" />
+    <wsdl:operation name="setTemperatura">
+      <soap12:operation soapAction="urn:setTemperatura" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -449,15 +500,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="setTemperatura">
-      <soap12:operation soapAction="urn:setTemperatura" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="getHumedad">
       <soap12:operation soapAction="urn:getHumedad" style="document" />
       <wsdl:input>
@@ -467,8 +509,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getTemperatura">
-      <soap12:operation soapAction="urn:getTemperatura" style="document" />
+    <wsdl:operation name="setLuminosidad">
+      <soap12:operation soapAction="urn:setLuminosidad" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -476,8 +518,35 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="setLuminosidad">
-      <soap12:operation soapAction="urn:setLuminosidad" style="document" />
+    <wsdl:operation name="getLuminosidad">
+      <soap12:operation soapAction="urn:getLuminosidad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNombreMaquina">
+      <soap12:operation soapAction="urn:getNombreMaquina" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPantalla">
+      <soap12:operation soapAction="urn:getPantalla" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTemperatura">
+      <soap12:operation soapAction="urn:getTemperatura" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -502,15 +571,6 @@
       <wsdl:fault name="EstacionMeteoRemoteException">
         <soap12:fault use="literal" name="EstacionMeteoRemoteException" namespace="" />
       </wsdl:fault>
-    </wsdl:operation>
-    <wsdl:operation name="getLuminosidad">
-      <soap12:operation soapAction="urn:getLuminosidad" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="setHumedad">
       <soap12:operation soapAction="urn:setHumedad" style="document" />
@@ -539,8 +599,8 @@
         <mime:content part="parameters" type="application/xml" />
       </wsdl:input>
     </wsdl:operation>
-    <wsdl:operation name="getPantalla">
-      <http:operation location="getPantalla" />
+    <wsdl:operation name="setTemperatura">
+      <http:operation location="setTemperatura" />
       <wsdl:input>
         <mime:content part="parameters" type="application/xml" />
       </wsdl:input>
@@ -557,26 +617,8 @@
         <mime:content part="parameters" type="application/xml" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="setTemperatura">
-      <http:operation location="setTemperatura" />
-      <wsdl:input>
-        <mime:content part="parameters" type="application/xml" />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:content part="parameters" type="application/xml" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="getHumedad">
       <http:operation location="getHumedad" />
-      <wsdl:input>
-        <mime:content part="parameters" type="application/xml" />
-      </wsdl:input>
-      <wsdl:output>
-        <mime:content part="parameters" type="application/xml" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getTemperatura">
-      <http:operation location="getTemperatura" />
       <wsdl:input>
         <mime:content part="parameters" type="application/xml" />
       </wsdl:input>
@@ -593,8 +635,8 @@
         <mime:content part="parameters" type="application/xml" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="muestraContenido">
-      <http:operation location="muestraContenido" />
+    <wsdl:operation name="getLuminosidad">
+      <http:operation location="getLuminosidad" />
       <wsdl:input>
         <mime:content part="parameters" type="application/xml" />
       </wsdl:input>
@@ -602,8 +644,35 @@
         <mime:content part="parameters" type="application/xml" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getLuminosidad">
-      <http:operation location="getLuminosidad" />
+    <wsdl:operation name="getNombreMaquina">
+      <http:operation location="getNombreMaquina" />
+      <wsdl:input>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPantalla">
+      <http:operation location="getPantalla" />
+      <wsdl:input>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTemperatura">
+      <http:operation location="getTemperatura" />
+      <wsdl:input>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="application/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="muestraContenido">
+      <http:operation location="muestraContenido" />
       <wsdl:input>
         <mime:content part="parameters" type="application/xml" />
       </wsdl:input>

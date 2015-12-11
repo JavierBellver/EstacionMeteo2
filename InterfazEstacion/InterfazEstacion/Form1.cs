@@ -42,19 +42,19 @@ namespace InterfazEstacion
                 switch (comboBox_Atributo.Text)
                 {
                     case "Temperatura":
-                        res = maquina_seleccionada.getTemperatura().ToString();
+                        res = maquina_seleccionada.getTemperatura(usuario,IP).ToString();
                         label_resultados.Text = "Temperatura="+res;
                         break;
                     case "Humedad":
-                        res = maquina_seleccionada.getHumedad().ToString();
+                        res = maquina_seleccionada.getHumedad(usuario, IP).ToString();
                         label_resultados.Text = "Humedad="+res;
                         break;
                     case "Luminosidad":
-                        res = maquina_seleccionada.getLuminosidad().ToString();
+                        res = maquina_seleccionada.getLuminosidad(usuario, IP).ToString();
                         label_resultados.Text = "Luminosidad="+res;
                         break;
                     case "Pantalla":
-                        label_resultados.Text = "Pantalla=" + maquina_seleccionada.getPantalla();
+                        label_resultados.Text = "Pantalla=" + maquina_seleccionada.getPantalla(usuario, IP);
                         break;
                 }
                 if (Sesion)
@@ -89,19 +89,19 @@ namespace InterfazEstacion
                 switch (comboBox_Atributo.Text)
                 {
                     case "Temperatura":
-                        res = maquina_seleccionada.setTemperatura(Int32.Parse(textBox_NuevoValor.Text));
+                        res = maquina_seleccionada.setTemperatura(Int32.Parse(textBox_NuevoValor.Text), usuario, IP);
                         label_resultados.Text = res;
                         break;
                     case "Humedad":
-                        res = maquina_seleccionada.setHumedad(Int32.Parse(textBox_NuevoValor.Text));
+                        res = maquina_seleccionada.setHumedad(Int32.Parse(textBox_NuevoValor.Text), usuario, IP);
                         label_resultados.Text = res;
                         break;
                     case "Luminosidad":
-                        res = maquina_seleccionada.setLuminosidad(Int32.Parse(textBox_NuevoValor.Text));
+                        res = maquina_seleccionada.setLuminosidad(Int32.Parse(textBox_NuevoValor.Text), usuario, IP);
                         label_resultados.Text = res;
                         break;
                     case "Pantalla":
-                        res = maquina_seleccionada.setMsg(textBox_NuevoValor.Text);
+                        res = maquina_seleccionada.setMsg(textBox_NuevoValor.Text, usuario, IP);
                         label_resultados.Text = res;
                         break;
                 }
@@ -131,10 +131,8 @@ namespace InterfazEstacion
         }
         private void Button_Add_Click(object sender, EventArgs e)
         {
-
-
             String est="estacion"+(listView_estacionesReg.Items.Count+1);
-            listView_estacionesReg.Items.Add(textBox_direccion.Text);
+            listView_estacionesReg.Items.Add("estacion"+(listView_estacionesReg.Items.Count+1)+"->"+textBox_direccion.Text);
             estaciones.Add(est, textBox_direccion.Text.ToString());
             comboBox_Estacion.Items.Insert(comboBox_Estacion.Items.Count, est);
         }

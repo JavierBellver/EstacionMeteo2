@@ -31,7 +31,6 @@ public class EstacionMeteo implements Serializable
     private String pantalla;
     private String NArchivo;
     private String Nombre_maquina;
-    private String ip;
     WebServiceContext context;
     
     public EstacionMeteo () throws FileNotFoundException, IOException
@@ -43,7 +42,6 @@ public class EstacionMeteo implements Serializable
         hum=Integer.parseInt(Contenido[1]);
         lum=Integer.parseInt(Contenido[2]);
         pantalla=Contenido[3];
-        ip = "127.0.0.1";
         if(!new File(Nombre_maquina+"-log.txt").isFile())
         {
             EscribirLog();
@@ -51,31 +49,31 @@ public class EstacionMeteo implements Serializable
     }
 
   //getters y setters
-    public int getTemperatura()
+    public int getTemperatura(String usuario,String ip)
     {
-    	actualizarLog("get | Temperatura","ninguno","root",ip);
+    	actualizarLog("get | Temperatura","ninguno",usuario,ip);
         return temp;
     }
     
-    public int getHumedad()
+    public int getHumedad(String usuario,String ip)
     {
     	actualizarLog("get | Humedad","ninguno","root",ip);
         return hum;
     }
     
-    public int getLuminosidad()
+    public int getLuminosidad(String usuario,String ip)
     {
     	actualizarLog("get | Luminosidad","ninguno","root",ip);
         return lum;
     }
     
-    public String getPantalla()
+    public String getPantalla(String usuario,String ip)
     {
     	actualizarLog("get | Pantalla","ninguno","root",ip);
         return pantalla;
     }
     
-    public String setTemperatura(int newTemp)
+    public String setTemperatura(int newTemp,String usuario,String ip)
     {
         String msg;
         String[] valores=new String[4];
@@ -95,7 +93,7 @@ public class EstacionMeteo implements Serializable
         return msg;
     }
     
-    public String setHumedad(int newHum)
+    public String setHumedad(int newHum,String usuario,String ip)
     {
         String msg;
         String[] valores=new String[4];
@@ -114,7 +112,7 @@ public class EstacionMeteo implements Serializable
         return msg;
     }
     
-    public String setLuminosidad(int newLum)
+    public String setLuminosidad(int newLum,String usuario,String ip)
     {
         String msg;
         String[] valores=new String[4];
@@ -133,7 +131,7 @@ public class EstacionMeteo implements Serializable
         return msg;
     }
     
-    public String setMsg(String newMsg)
+    public String setMsg(String newMsg,String usuario,String ip)
     {
         String msg;
         String[] valores=new String[4];
@@ -244,7 +242,7 @@ public class EstacionMeteo implements Serializable
         }
     }
 
-    public void EscribirFichero() throws IOException, FileNotFoundException
+    private void EscribirFichero() throws IOException, FileNotFoundException
     {
         File fichero = new File(NArchivo);
         fichero.createNewFile();
