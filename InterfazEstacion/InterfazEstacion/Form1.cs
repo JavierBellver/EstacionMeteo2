@@ -18,10 +18,10 @@ namespace InterfazEstacion
 {
     public partial class Form1 : Form
     {
-
         EstMeteo.EstacionMeteo maquina_seleccionada;
         String usuario;
         String IP;
+        string log_name;
         Dictionary<String, String> estaciones;
 
         public Form1(String nUsuario)
@@ -31,6 +31,7 @@ namespace InterfazEstacion
             IP=Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString();
             estaciones=new Dictionary<string,string>();
             this.FormClosed += new FormClosedEventHandler(f_FormClosed);
+            log_name = "log" + DateTime.Now.Hour+"_"+ DateTime.Now.Minute+"_"+DateTime.Now.Second+ ".txt";
             inicializa_log();
         }
 
@@ -61,20 +62,31 @@ namespace InterfazEstacion
                     case "Pantalla":
                         label_resultados.Text = "Pantalla=" + maquina_seleccionada.getPantalla(usuario, IP);
                         break;
+                    default:
+                        String error = "Error: debe especificar un servicio";
+                        System.Windows.Forms.MessageBox.Show("Error: debe especificar un servicio");
+                        error_log(error);
+                        break;
                 }
                 actualiza_log(false);
             }
             catch(WebException)
             {
-                System.Windows.Forms.MessageBox.Show("Error: servicio innaccesible");
+                String error = "Error: servicio innaccesible";
+                System.Windows.Forms.MessageBox.Show(error);
+                error_log(error);
             }
             catch(NullReferenceException)
             {
+                String error = "Error: debe especificar un servicio";
                 System.Windows.Forms.MessageBox.Show("Error: debe especificar un servicio");
+                error_log(error);
             }
             catch(Exception)
             {
+                String error = "Error: problema no especificado";
                 System.Windows.Forms.MessageBox.Show("Error: Error no identificado");
+                error_log(error);
             }
         }
 
@@ -85,7 +97,6 @@ namespace InterfazEstacion
             try
             {
                 string res = "La operación fallo";
-                
                 switch (comboBox_Atributo.Text)
                 {
                     case "Temperatura":
@@ -104,24 +115,37 @@ namespace InterfazEstacion
                         res = maquina_seleccionada.setMsg(textBox_NuevoValor.Text, usuario, IP);
                         label_resultados.Text = res;
                         break;
+                    default:
+                        String error = "Error: debe especificar un servicio";
+                        System.Windows.Forms.MessageBox.Show("Error: debe especificar un servicio");
+                        error_log(error);
+                        break;
                 }
                 actualiza_log(true);
             }
             catch (WebException)
             {
-                System.Windows.Forms.MessageBox.Show("Error: servicio innaccesible");
+                String error = "Error: servicio innaccesible";
+                System.Windows.Forms.MessageBox.Show(error);
+                error_log(error);
             }
             catch (NullReferenceException)
             {
+                String error = "Error: debe especificar un servicio";
                 System.Windows.Forms.MessageBox.Show("Error: debe especificar un servicio");
+                error_log(error);
             }
             catch (FormatException)
             {
+                String error = "Error: parametro de entrada incorrecto o vacío";
                 System.Windows.Forms.MessageBox.Show("Error: parametro de entrada incorrecto o vacío");
+                error_log(error);
             }
             catch (Exception)
             {
+                String error = "Error: problema no especificado";
                 System.Windows.Forms.MessageBox.Show("Error: Error no identificado");
+                error_log(error);
             }
         }
         private void Button_Add_Click(object sender, EventArgs e)
@@ -147,32 +171,38 @@ namespace InterfazEstacion
             }
             catch (WebException)
             {
-                System.Windows.Forms.MessageBox.Show("Error: servicio innaccesible o no existente");
+                String error = "Error: servicio innaccesible o no existente";
+                System.Windows.Forms.MessageBox.Show(error);
+                error_log(error);
             }
             catch (UriFormatException)
             {
-                System.Windows.Forms.MessageBox.Show("Error: debe especificar un servicio");
+                String error = "Error: ruta de recurso invalida";
+                System.Windows.Forms.MessageBox.Show(error);
+                error_log(error);
             }
             catch (Exception)
             {
+                String error = "Error: problema no especificado";
                 System.Windows.Forms.MessageBox.Show("Error: Error no identificado");
+                error_log(error);
             }
         }
 
         private void actualiza_log(bool escritura)
         {
-            
             String entrada = "";
             String fecha=DateTime.Now.ToString();
             StreamWriter archivo;
 
-            if (!File.Exists("log.txt"))
+            if (!File.Exists(log_name))
             {
-                archivo = File.CreateText("log.txt");
+                inicializa_log();
+                archivo = new StreamWriter(log_name, true);
             }
             else
             {
-                archivo = new StreamWriter("log.txt", true);
+                archivo = new StreamWriter(log_name, true);
             }
             if(!escritura)
             {
@@ -190,13 +220,13 @@ namespace InterfazEstacion
         {
             StreamWriter archivo;
             String fecha = DateTime.Now.ToString();
-            if (!File.Exists("log.txt"))
+            if (!File.Exists(log_name))
             {
-                archivo = File.CreateText("log.txt");
+                archivo = File.CreateText(log_name);
             }
             else
             {
-                archivo = new StreamWriter("log.txt", true);
+                archivo = new StreamWriter(log_name, true);
             }
             String s = "Inicio de Sesion:" + "[" + fecha + "] " + usuario + "@" + IP;
             archivo.WriteLine("-------------------------------------------------------------------------", true);
@@ -209,13 +239,13 @@ namespace InterfazEstacion
         {
             StreamWriter archivo;
             String fecha = DateTime.Now.ToString();
-            if (!File.Exists("log.txt"))
+            if (!File.Exists(log_name))
             {
-                archivo = File.CreateText("log.txt");
+                archivo = File.CreateText(log_name);
             }
             else
             {
-                archivo = new StreamWriter("log.txt", true);
+                archivo = new StreamWriter(log_name, true);
             }
             String s = "Finalización de Sesion:" + "[" + fecha + "] " + usuario + "@" + IP;
             archivo.WriteLine("-------------------------------------------------------------------------", true);
@@ -228,32 +258,18 @@ namespace InterfazEstacion
         {
             StreamWriter archivo;
             String fecha = DateTime.Now.ToString();
-            if (!File.Exists("log.txt"))
+            if (!File.Exists(log_name))
             {
-                archivo = File.CreateText("log.txt");
+                inicializa_log();
+                archivo = new StreamWriter(log_name, true);
             }
             else
             {
-                archivo = new StreamWriter("log.txt", true);
+                archivo = new StreamWriter(log_name, true);
             }
             String s = error + "[" + fecha + "] " + usuario + "@" + IP;
             archivo.WriteLine(s, true);
             archivo.Close();
-        }
-
-        public static string MD5Encrypt(string value)
-        {
-            MD5CryptoServiceProvider provider = new MD5CryptoServiceProvider();
-
-            byte[] data = System.Text.Encoding.ASCII.GetBytes(value);
-            data = provider.ComputeHash(data);
-
-            string md5 = string.Empty;
-
-            for (int i = 0; i < data.Length; i++)
-                md5 += data[i].ToString("x2").ToLower();
-
-            return md5;
         }
     }
 }
