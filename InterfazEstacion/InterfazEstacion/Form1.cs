@@ -22,7 +22,6 @@ namespace InterfazEstacion
         EstMeteo.EstacionMeteo maquina_seleccionada;
         String usuario;
         String IP;
-        bool Sesion;
         Dictionary<String, String> estaciones;
 
         public Form1(String nUsuario)
@@ -30,8 +29,14 @@ namespace InterfazEstacion
             InitializeComponent();
             usuario = nUsuario;
             IP=Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString();
-            Sesion = true;
             estaciones=new Dictionary<string,string>();
+            this.FormClosed += new FormClosedEventHandler(f_FormClosed);
+            inicializa_log();
+        }
+
+        private void f_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            finaliza_log();
         }
 
         private void button_Consultar_Click(object sender, EventArgs e)
@@ -57,12 +62,7 @@ namespace InterfazEstacion
                         label_resultados.Text = "Pantalla=" + maquina_seleccionada.getPantalla(usuario, IP);
                         break;
                 }
-                if (Sesion)
-                {
-                    actualiza_log(false,Sesion);
-                    Sesion = false;
-                }
-                else actualiza_log(false, Sesion);
+                actualiza_log(false);
             }
             catch(WebException)
             {
@@ -105,12 +105,7 @@ namespace InterfazEstacion
                         label_resultados.Text = res;
                         break;
                 }
-                if (Sesion)
-                {
-                    actualiza_log(true, Sesion);
-                    Sesion = false;
-                }
-                else actualiza_log(true, Sesion);
+                actualiza_log(true);
             }
             catch (WebException)
             {
@@ -164,7 +159,7 @@ namespace InterfazEstacion
             }
         }
 
-        private void actualiza_log(bool escritura,bool Sesion)
+        private void actualiza_log(bool escritura)
         {
             
             String entrada = "";
@@ -173,18 +168,11 @@ namespace InterfazEstacion
 
             if (!File.Exists("log.txt"))
             {
-                archivo=File.CreateText("log.txt");
+                archivo = File.CreateText("log.txt");
             }
-            else archivo = new StreamWriter("log.txt",true);
-
-            if (Sesion)
+            else
             {
-                String s = "[" + fecha + "] " + usuario + "@" + IP;
-                archivo.WriteLine("-------------------------------------------------------------------------", true);
-                archivo.WriteLine(s, true);
-                archivo.WriteLine("-------------------------------------------------------------------------", true);
-                s = "";
-                Sesion = false;
+                archivo = new StreamWriter("log.txt", true);
             }
             if(!escritura)
             {
@@ -196,8 +184,63 @@ namespace InterfazEstacion
             }
             archivo.WriteLine(entrada,true);
             archivo.Close();
-
         }
+
+        private void inicializa_log()
+        {
+            StreamWriter archivo;
+            String fecha = DateTime.Now.ToString();
+            if (!File.Exists("log.txt"))
+            {
+                archivo = File.CreateText("log.txt");
+            }
+            else
+            {
+                archivo = new StreamWriter("log.txt", true);
+            }
+            String s = "Inicio de Sesion:" + "[" + fecha + "] " + usuario + "@" + IP;
+            archivo.WriteLine("-------------------------------------------------------------------------", true);
+            archivo.WriteLine(s, true);
+            archivo.WriteLine("-------------------------------------------------------------------------", true);
+            archivo.Close();
+        }
+
+        private void finaliza_log()
+        {
+            StreamWriter archivo;
+            String fecha = DateTime.Now.ToString();
+            if (!File.Exists("log.txt"))
+            {
+                archivo = File.CreateText("log.txt");
+            }
+            else
+            {
+                archivo = new StreamWriter("log.txt", true);
+            }
+            String s = "Finalización de Sesion:" + "[" + fecha + "] " + usuario + "@" + IP;
+            archivo.WriteLine("-------------------------------------------------------------------------", true);
+            archivo.WriteLine(s, true);
+            archivo.WriteLine("-------------------------------------------------------------------------", true);
+            archivo.Close();
+        }
+
+        private void error_log(String error)
+        {
+            StreamWriter archivo;
+            String fecha = DateTime.Now.ToString();
+            if (!File.Exists("log.txt"))
+            {
+                archivo = File.CreateText("log.txt");
+            }
+            else
+            {
+                archivo = new StreamWriter("log.txt", true);
+            }
+            String s = error + "[" + fecha + "] " + usuario + "@" + IP;
+            archivo.WriteLine(s, true);
+            archivo.Close();
+        }
+
         public static string MD5Encrypt(string value)
         {
             MD5CryptoServiceProvider provider = new MD5CryptoServiceProvider();
@@ -211,6 +254,6 @@ namespace InterfazEstacion
                 md5 += data[i].ToString("x2").ToLower();
 
             return md5;
-        }  
+        }
     }
 }
