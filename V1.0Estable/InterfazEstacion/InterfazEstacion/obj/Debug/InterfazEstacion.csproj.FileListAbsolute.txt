@@ -37,3 +37,6 @@ C:\Users\EPS\Downloads\EstacionMeteo2-master\InterfazEstacion\InterfazEstacion\o
 C:\Users\EPS\Downloads\EstacionMeteo2-master\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.login.resources
 C:\Users\EPS\Downloads\EstacionMeteo2-master\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.Properties.Resources.resources
 C:\Users\EPS\Downloads\EstacionMeteo2-master\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.csproj.GenerateResource.Cache
+C:\Users\Carlos\EstacionMeteo2\V1.0Estable\InterfazEstacion\InterfazEstacion\bin\Debug\InterfazEstacion.exe.config
+C:\Users\Carlos\EstacionMeteo2\V1.0Estable\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.exe
+C:\Users\Carlos\EstacionMeteo2\V1.0Estable\InterfazEstacion\InterfazEstacion\obj\Debug\InterfazEstacion.pdb

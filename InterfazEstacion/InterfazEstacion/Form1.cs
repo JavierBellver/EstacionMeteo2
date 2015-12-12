@@ -44,19 +44,20 @@ namespace InterfazEstacion
         {
             try
             {
-                String res="";
+                int res=0;
+                bool a = true;
                 switch (comboBox_Atributo.Text)
                 {
                     case "Temperatura":
-                        res = maquina_seleccionada.getTemperatura(usuario,IP).ToString();
+                        maquina_seleccionada.getTemperatura(usuario,IP,out res, out a);
                         label_resultados.Text = "Temperatura="+res;
                         break;
                     case "Humedad":
-                        res = maquina_seleccionada.getHumedad(usuario, IP).ToString();
+                        maquina_seleccionada.getHumedad(usuario, IP, out res, out a);
                         label_resultados.Text = "Humedad="+res;
                         break;
                     case "Luminosidad":
-                        res = maquina_seleccionada.getLuminosidad(usuario, IP).ToString();
+                        maquina_seleccionada.getLuminosidad(usuario, IP, out res, out a);
                         label_resultados.Text = "Luminosidad="+res;
                         break;
                     case "Pantalla":
@@ -97,18 +98,19 @@ namespace InterfazEstacion
             try
             {
                 string res = "La operación fallo";
+                bool b = true;
                 switch (comboBox_Atributo.Text)
                 {
                     case "Temperatura":
-                        res = maquina_seleccionada.setTemperatura(Int32.Parse(textBox_NuevoValor.Text), usuario, IP);
+                        res = maquina_seleccionada.setTemperatura(Int32.Parse(textBox_NuevoValor.Text), b, usuario, IP);
                         label_resultados.Text = res;
                         break;
                     case "Humedad":
-                        res = maquina_seleccionada.setHumedad(Int32.Parse(textBox_NuevoValor.Text), usuario, IP);
+                        res = maquina_seleccionada.setHumedad(Int32.Parse(textBox_NuevoValor.Text), b, usuario, IP);
                         label_resultados.Text = res;
                         break;
                     case "Luminosidad":
-                        res = maquina_seleccionada.setLuminosidad(Int32.Parse(textBox_NuevoValor.Text), usuario, IP);
+                        res = maquina_seleccionada.setLuminosidad(Int32.Parse(textBox_NuevoValor.Text), b, usuario, IP);
                         label_resultados.Text = res;
                         break;
                     case "Pantalla":

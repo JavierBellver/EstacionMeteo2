@@ -32,64 +32,6 @@
     <xs:schema xmlns:ax25="http://rmi.java/xsd" xmlns:ax22="http://io.java/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://estacion">
       <xs:import namespace="http://io.java/xsd" />
       <xs:import namespace="http://rmi.java/xsd" />
-      <xs:element name="getTemperatura">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string" />
-            <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="getTemperaturaResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="return" type="xs:int" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="getHumedad">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string" />
-            <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="getHumedadResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="return" type="xs:int" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="setLuminosidad">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="newLum" type="xs:int" />
-            <xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string" />
-            <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="setLuminosidadResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="getNombreMaquina">
-        <xs:complexType>
-          <xs:sequence />
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="getNombreMaquinaResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="EstacionMeteoFileNotFoundException">
         <xs:complexType>
           <xs:sequence>
@@ -125,26 +67,33 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="setTemperatura">
+      <xs:element name="getTemperatura">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="newTemp" type="xs:int" />
             <xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string" />
             <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="setTemperaturaResponse">
+      <xs:element name="getTemperaturaResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="return" type="xs:int" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="Modifica">
+      <xs:element name="getHumedad">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" maxOccurs="unbounded" name="valores" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getHumedadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:int" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -159,20 +108,89 @@
       <xs:element name="getLuminosidadResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="return" type="xs:int" />
+            <xs:element minOccurs="0" name="return" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPantalla">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getPantallaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setTemperatura">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="newTemp" type="xs:int" />
+            <xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setTemperaturaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Lectura">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Atributo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="nValor" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="LecturaResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Modifica">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="valores" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="setHumedad">
         <xs:complexType>
           <xs:sequence>
-            <xs:element name="newHum" type="xs:int" />
+            <xs:element minOccurs="0" name="newHum" type="xs:int" />
             <xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string" />
             <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="setHumedadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setLuminosidad">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="newLum" type="xs:int" />
+            <xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setLuminosidadResponse">
         <xs:complexType>
           <xs:sequence>
             <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
@@ -195,33 +213,15 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="getPantalla">
+      <xs:element name="getNombreMaquina">
         <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="usuario" nillable="true" type="xs:string" />
-            <xs:element minOccurs="0" name="ip" nillable="true" type="xs:string" />
-          </xs:sequence>
+          <xs:sequence />
         </xs:complexType>
       </xs:element>
-      <xs:element name="getPantallaResponse">
+      <xs:element name="getNombreMaquinaResponse">
         <xs:complexType>
           <xs:sequence>
             <xs:element minOccurs="0" name="return" nillable="true" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="Lectura">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="Atributo" nillable="true" type="xs:string" />
-            <xs:element minOccurs="0" name="nValor" nillable="true" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="LecturaResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" maxOccurs="unbounded" name="return" nillable="true" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
