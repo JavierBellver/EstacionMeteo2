@@ -3,6 +3,12 @@ package estacion;
 import java.io.Serializable;
 import java.rmi.*;
 import java.rmi.server.*;
+import java.security.GeneralSecurityException;
+import java.security.InvalidKeyException;
+import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -15,11 +21,34 @@ import java.util.Date;
 import java.util.Scanner;
 import java.io.FileWriter;
 
-import javax.annotation.Resource;
-import javax.jws.WebMethod;
-import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.IOUtils;
+ 
+
+
+
+
+
+
+
+
+
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.security.GeneralSecurityException;
+import java.security.KeyFactory;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.RSAPrivateKeySpec;
+import java.security.spec.X509EncodedKeySpec;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.xml.ws.WebServiceContext;
-import javax.xml.ws.handler.MessageContext;
 
 public class EstacionMeteo implements Serializable
 {
@@ -31,7 +60,6 @@ public class EstacionMeteo implements Serializable
     private String pantalla;
     private String NArchivo;
     private String Nombre_maquina;
-    private String ip;
     WebServiceContext context;
     
     public EstacionMeteo () throws FileNotFoundException, IOException
@@ -43,7 +71,6 @@ public class EstacionMeteo implements Serializable
         hum=Integer.parseInt(Contenido[1]);
         lum=Integer.parseInt(Contenido[2]);
         pantalla=Contenido[3];
-        ip = "127.0.0.1";
         if(!new File(Nombre_maquina+"-log.txt").isFile())
         {
             EscribirLog();
@@ -51,31 +78,31 @@ public class EstacionMeteo implements Serializable
     }
 
   //getters y setters
-    public int getTemperatura()
+    public int getTemperatura(String usuario,String ip)
     {
-    	actualizarLog("get | Temperatura","ninguno","root",ip);
+    	actualizarLog(false,"get | Temperatura","ninguno",usuario,ip);
         return temp;
     }
     
-    public int getHumedad()
+    public int getHumedad(String usuario,String ip)
     {
-    	actualizarLog("get | Humedad","ninguno","root",ip);
+    	actualizarLog(false,"get | Humedad","ninguno","root",ip);
         return hum;
     }
     
-    public int getLuminosidad()
+    public int getLuminosidad(String usuario,String ip)
     {
-    	actualizarLog("get | Luminosidad","ninguno","root",ip);
+    	actualizarLog(false,"get | Luminosidad","ninguno","root",ip);
         return lum;
     }
     
-    public String getPantalla()
+    public String getPantalla(String usuario,String ip)
     {
-    	actualizarLog("get | Pantalla","ninguno","root",ip);
+    	actualizarLog(false,"get | Pantalla","ninguno","root",ip);
         return pantalla;
     }
     
-    public String setTemperatura(int newTemp)
+    public String setTemperatura(int newTemp,String usuario,String ip)
     {
         String msg;
         String[] valores=new String[4];
@@ -86,16 +113,17 @@ public class EstacionMeteo implements Serializable
             msg="Valor de Temperatura modificado a "+newTemp+" con exito.\n";
             valores=Lectura("Temperatura", String.valueOf(newTemp));
             Modifica(valores);
-            actualizarLog("set | Temperatura",String.valueOf(newTemp),"root",ip);
+            actualizarLog(false,"set | Temperatura",String.valueOf(newTemp),"root",ip);
         }
         else
         {
             msg="Valor de temperatura fuera de rango. Introduzca un valor entre -30 y 50\n";
+            actualizarLog(true,msg,"ninguno","root",ip);
         }
         return msg;
     }
     
-    public String setHumedad(int newHum)
+    public String setHumedad(int newHum,String usuario,String ip)
     {
         String msg;
         String[] valores=new String[4];
@@ -105,16 +133,17 @@ public class EstacionMeteo implements Serializable
             msg="Valor de Humedad modificado a "+newHum+" con exito.\n";
             valores=Lectura("Humedad", String.valueOf(newHum));
             Modifica(valores);
-            actualizarLog("set | Humedad",String.valueOf(newHum),"root",ip);
+            actualizarLog(false,"set | Humedad",String.valueOf(newHum),"root",ip);
         }
         else
         {
             msg="Valor de humedad fuera de rango. Introduzca un valor entre 0 y 100\n";
+            actualizarLog(true,msg,"ninguno","root",ip);
         }
         return msg;
     }
     
-    public String setLuminosidad(int newLum)
+    public String setLuminosidad(int newLum,String usuario,String ip)
     {
         String msg;
         String[] valores=new String[4];
@@ -124,16 +153,17 @@ public class EstacionMeteo implements Serializable
             msg="Valor de luminosidad modificado a "+newLum+" con exito.\n";
             valores=Lectura("Luminosidad", String.valueOf(newLum));
             Modifica(valores);
-            actualizarLog("set | Luminosidad",String.valueOf(newLum),"root",ip);
+            actualizarLog(false,"set | Luminosidad",String.valueOf(newLum),"root",ip);
         }
         else
         {
             msg="Valor de luminosidad fuera de rango. Introduzca un valor entre 0 y 800.\n";
+            actualizarLog(true,msg,"ninguno","root",ip);
         }
         return msg;
     }
     
-    public String setMsg(String newMsg)
+    public String setMsg(String newMsg,String usuario,String ip)
     {
         String msg;
         String[] valores=new String[4];
@@ -143,11 +173,12 @@ public class EstacionMeteo implements Serializable
             msg="Mensaje cambiado correctamente.\n";
             valores=Lectura("Pantalla", newMsg);
             Modifica(valores);
-            actualizarLog("set | Pantalla",String.valueOf(newMsg),"root",ip);
+            actualizarLog(false,"set | Pantalla",String.valueOf(newMsg),"root",ip);
         }
         else
         {
             msg="Valor de mensaje demasiado largo.Introduzca un mensaje de menos de 150 caracteres.\n";
+            actualizarLog(true,msg,"ninguno","root",ip);
         }
         return msg;
     }
@@ -244,7 +275,7 @@ public class EstacionMeteo implements Serializable
         }
     }
 
-    public void EscribirFichero() throws IOException, FileNotFoundException
+    private void EscribirFichero() throws IOException, FileNotFoundException
     {
         File fichero = new File(NArchivo);
         fichero.createNewFile();
@@ -264,17 +295,25 @@ public class EstacionMeteo implements Serializable
         fichero.createNewFile();
         PrintWriter writer = new PrintWriter(nombre_log,"UTF-8");
         writer.println("# Sistema de log del servicio");
-        writer.println("# Campos en orden: Fecha, usuario@ip, Acción, Parámetros");
+        writer.println("# Campos en orden: Fecha, usuario@ip, Acción, Parámetros"+date.toString());
         writer.close();
     }
     
-    private void actualizarLog(String nombre_metodo,String parametro,String usuario,String ip)
+    
+    private void actualizarLog(Boolean error,String nombre_metodo,String parametro,String usuario,String ip)
     {
     	try {
         	Date date = new Date();
         	FileWriter fichero = new FileWriter(Nombre_maquina+"-log.txt",true);
         	BufferedWriter out = new BufferedWriter(fichero);
-        	out.write("["+date+"] "+usuario+"@"+ip+" || "+nombre_metodo+"->"+parametro+"\n");
+        	if(error)
+        	{
+        		out.write("["+date+"] "+usuario+"@"+ip+" || "+nombre_metodo+"\n");
+        	}
+        	else
+        	{
+        		out.write("["+date+"] "+usuario+"@"+ip+" || "+"Error:"+nombre_metodo+"->"+parametro+"\n");
+        	}
         	out.newLine();
         	out.flush();
         	out.close();

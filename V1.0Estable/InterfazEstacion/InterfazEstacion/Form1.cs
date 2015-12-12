@@ -18,11 +18,10 @@ namespace InterfazEstacion
 {
     public partial class Form1 : Form
     {
-
         EstMeteo.EstacionMeteo maquina_seleccionada;
         String usuario;
         String IP;
-        bool Sesion;
+        string log_name;
         Dictionary<String, String> estaciones;
 
         public Form1(String nUsuario)
@@ -30,51 +29,65 @@ namespace InterfazEstacion
             InitializeComponent();
             usuario = nUsuario;
             IP=Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString();
-            Sesion = true;
             estaciones=new Dictionary<string,string>();
+            this.FormClosed += new FormClosedEventHandler(f_FormClosed);
+            log_name = "log" + DateTime.Now.Hour+"_"+ DateTime.Now.Minute+"_"+DateTime.Now.Second+ ".txt";
+            inicializa_log();
+        }
+
+        private void f_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            finaliza_log();
         }
 
         private void button_Consultar_Click(object sender, EventArgs e)
         {
             try
             {
-                String res="";
+                int res=0;
+                bool a = true;
                 switch (comboBox_Atributo.Text)
                 {
                     case "Temperatura":
-                        res = maquina_seleccionada.getTemperatura().ToString();
+                        maquina_seleccionada.getTemperatura(usuario,IP,out res, out a);
                         label_resultados.Text = "Temperatura="+res;
                         break;
                     case "Humedad":
-                        res = maquina_seleccionada.getHumedad().ToString();
+                        maquina_seleccionada.getHumedad(usuario, IP, out res, out a);
                         label_resultados.Text = "Humedad="+res;
                         break;
                     case "Luminosidad":
-                        res = maquina_seleccionada.getLuminosidad().ToString();
+                        maquina_seleccionada.getLuminosidad(usuario, IP, out res, out a);
                         label_resultados.Text = "Luminosidad="+res;
                         break;
                     case "Pantalla":
-                        label_resultados.Text = "Pantalla=" + maquina_seleccionada.getPantalla();
+                        label_resultados.Text = "Pantalla=" + maquina_seleccionada.getPantalla(usuario, IP);
+                        break;
+                    default:
+                        String error = "Error: debe especificar un servicio";
+                        System.Windows.Forms.MessageBox.Show("Error: debe especificar un servicio");
+                        error_log(error);
                         break;
                 }
-                if (Sesion)
-                {
-                    actualiza_log(false,Sesion);
-                    Sesion = false;
-                }
-                else actualiza_log(false, Sesion);
+                actualiza_log(false);
             }
             catch(WebException)
             {
-                System.Windows.Forms.MessageBox.Show("Error: servicio innaccesible");
+                String error = "Error: servicio innaccesible";
+                System.Windows.Forms.MessageBox.Show(error);
+                error_log(error);
             }
             catch(NullReferenceException)
             {
+                String error = "Error: debe especificar un servicio";
                 System.Windows.Forms.MessageBox.Show("Error: debe especificar un servicio");
+                error_log(error);
             }
             catch(Exception)
             {
+                String error = "Error: problema no especificado";
                 System.Windows.Forms.MessageBox.Show("Error: Error no identificado");
+                error_log(error);
             }
         }
 
@@ -85,56 +98,62 @@ namespace InterfazEstacion
             try
             {
                 string res = "La operación fallo";
-                
+                bool b = true;
                 switch (comboBox_Atributo.Text)
                 {
                     case "Temperatura":
-                        res = maquina_seleccionada.setTemperatura(Int32.Parse(textBox_NuevoValor.Text));
+                        res = maquina_seleccionada.setTemperatura(Int32.Parse(textBox_NuevoValor.Text), b, usuario, IP);
                         label_resultados.Text = res;
                         break;
                     case "Humedad":
-                        res = maquina_seleccionada.setHumedad(Int32.Parse(textBox_NuevoValor.Text));
+                        res = maquina_seleccionada.setHumedad(Int32.Parse(textBox_NuevoValor.Text), b, usuario, IP);
                         label_resultados.Text = res;
                         break;
                     case "Luminosidad":
-                        res = maquina_seleccionada.setLuminosidad(Int32.Parse(textBox_NuevoValor.Text));
+                        res = maquina_seleccionada.setLuminosidad(Int32.Parse(textBox_NuevoValor.Text), b, usuario, IP);
                         label_resultados.Text = res;
                         break;
                     case "Pantalla":
-                        res = maquina_seleccionada.setMsg(textBox_NuevoValor.Text);
+                        res = maquina_seleccionada.setMsg(textBox_NuevoValor.Text, usuario, IP);
                         label_resultados.Text = res;
                         break;
+                    default:
+                        String error = "Error: debe especificar un servicio";
+                        System.Windows.Forms.MessageBox.Show("Error: debe especificar un servicio");
+                        error_log(error);
+                        break;
                 }
-                if (Sesion)
-                {
-                    actualiza_log(true, Sesion);
-                    Sesion = false;
-                }
-                else actualiza_log(true, Sesion);
+                actualiza_log(true);
             }
             catch (WebException)
             {
-                System.Windows.Forms.MessageBox.Show("Error: servicio innaccesible");
+                String error = "Error: servicio innaccesible";
+                System.Windows.Forms.MessageBox.Show(error);
+                error_log(error);
             }
             catch (NullReferenceException)
             {
+                String error = "Error: debe especificar un servicio";
                 System.Windows.Forms.MessageBox.Show("Error: debe especificar un servicio");
+                error_log(error);
             }
             catch (FormatException)
             {
+                String error = "Error: parametro de entrada incorrecto o vacío";
                 System.Windows.Forms.MessageBox.Show("Error: parametro de entrada incorrecto o vacío");
+                error_log(error);
             }
             catch (Exception)
             {
+                String error = "Error: problema no especificado";
                 System.Windows.Forms.MessageBox.Show("Error: Error no identificado");
+                error_log(error);
             }
         }
         private void Button_Add_Click(object sender, EventArgs e)
         {
-
-
             String est="estacion"+(listView_estacionesReg.Items.Count+1);
-            listView_estacionesReg.Items.Add(textBox_direccion.Text);
+            listView_estacionesReg.Items.Add("estacion"+(listView_estacionesReg.Items.Count+1)+"->"+textBox_direccion.Text);
             estaciones.Add(est, textBox_direccion.Text.ToString());
             comboBox_Estacion.Items.Insert(comboBox_Estacion.Items.Count, est);
         }
@@ -154,39 +173,38 @@ namespace InterfazEstacion
             }
             catch (WebException)
             {
-                System.Windows.Forms.MessageBox.Show("Error: servicio innaccesible o no existente");
+                String error = "Error: servicio innaccesible o no existente";
+                System.Windows.Forms.MessageBox.Show(error);
+                error_log(error);
             }
             catch (UriFormatException)
             {
-                System.Windows.Forms.MessageBox.Show("Error: debe especificar un servicio");
+                String error = "Error: ruta de recurso invalida";
+                System.Windows.Forms.MessageBox.Show(error);
+                error_log(error);
             }
             catch (Exception)
             {
+                String error = "Error: problema no especificado";
                 System.Windows.Forms.MessageBox.Show("Error: Error no identificado");
+                error_log(error);
             }
         }
 
-        private void actualiza_log(bool escritura,bool Sesion)
+        private void actualiza_log(bool escritura)
         {
-            
             String entrada = "";
             String fecha=DateTime.Now.ToString();
             StreamWriter archivo;
 
-            if (!File.Exists("log.txt"))
+            if (!File.Exists(log_name))
             {
-                archivo=File.CreateText("log.txt");
+                inicializa_log();
+                archivo = new StreamWriter(log_name, true);
             }
-            else archivo = new StreamWriter("log.txt",true);
-
-            if (Sesion)
+            else
             {
-                String s = "[" + fecha + "] " + usuario + "@" + IP;
-                archivo.WriteLine("-------------------------------------------------------------------------", true);
-                archivo.WriteLine(s, true);
-                archivo.WriteLine("-------------------------------------------------------------------------", true);
-                s = "";
-                Sesion = false;
+                archivo = new StreamWriter(log_name, true);
             }
             if(!escritura)
             {
@@ -198,21 +216,62 @@ namespace InterfazEstacion
             }
             archivo.WriteLine(entrada,true);
             archivo.Close();
-
         }
-        public static string MD5Encrypt(string value)
+
+        private void inicializa_log()
         {
-            MD5CryptoServiceProvider provider = new MD5CryptoServiceProvider();
+            StreamWriter archivo;
+            String fecha = DateTime.Now.ToString();
+            if (!File.Exists(log_name))
+            {
+                archivo = File.CreateText(log_name);
+            }
+            else
+            {
+                archivo = new StreamWriter(log_name, true);
+            }
+            String s = "Inicio de Sesion:" + "[" + fecha + "] " + usuario + "@" + IP;
+            archivo.WriteLine("-------------------------------------------------------------------------", true);
+            archivo.WriteLine(s, true);
+            archivo.WriteLine("-------------------------------------------------------------------------", true);
+            archivo.Close();
+        }
 
-            byte[] data = System.Text.Encoding.ASCII.GetBytes(value);
-            data = provider.ComputeHash(data);
+        private void finaliza_log()
+        {
+            StreamWriter archivo;
+            String fecha = DateTime.Now.ToString();
+            if (!File.Exists(log_name))
+            {
+                archivo = File.CreateText(log_name);
+            }
+            else
+            {
+                archivo = new StreamWriter(log_name, true);
+            }
+            String s = "Finalización de Sesion:" + "[" + fecha + "] " + usuario + "@" + IP;
+            archivo.WriteLine("-------------------------------------------------------------------------", true);
+            archivo.WriteLine(s, true);
+            archivo.WriteLine("-------------------------------------------------------------------------", true);
+            archivo.Close();
+        }
 
-            string md5 = string.Empty;
-
-            for (int i = 0; i < data.Length; i++)
-                md5 += data[i].ToString("x2").ToLower();
-
-            return md5;
-        }  
+        private void error_log(String error)
+        {
+            StreamWriter archivo;
+            String fecha = DateTime.Now.ToString();
+            if (!File.Exists(log_name))
+            {
+                inicializa_log();
+                archivo = new StreamWriter(log_name, true);
+            }
+            else
+            {
+                archivo = new StreamWriter(log_name, true);
+            }
+            String s = error + "[" + fecha + "] " + usuario + "@" + IP;
+            archivo.WriteLine(s, true);
+            archivo.Close();
+        }
     }
 }
